@@ -11,7 +11,7 @@ export default class App extends React.Component {
  render() {
   return (
     <BrowserRouter>
-    <div>
+    <div className="App">
       <Signin/>
       <Sidebar/>
       <Route path='/' component={MainPage} exact/>    
