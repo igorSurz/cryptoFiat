@@ -12,8 +12,8 @@ export default class App extends React.Component {
     <BrowserRouter>
     <div>
       <Sidebar/>
-      <MainPage/>
-      <Route path='/chart' component={ChartPage}/>    
+      <Route path='/' component={MainPage} exact/>    
+      <Route path='/chart' component={ChartPage} exact/>    
     </div>
     </BrowserRouter>
   );
