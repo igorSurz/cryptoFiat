@@ -1,7 +1,7 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
+import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 
 export default class Signin extends React.Component {
@@ -14,9 +14,10 @@ export default class Signin extends React.Component {
           email:'',
           password:''
         };
+   
+     
     }
- 
-
+   
     handleEmailChange(e){
         this.setState({email:e.target.value})
         
@@ -26,8 +27,20 @@ export default class Signin extends React.Component {
        
     }
 
-    signIn(){
-        console.log('Email address is ' + this.state.email + ' Password is ' + this.state.password);            
+    signIn(e){
+        axios.post('/signin', {
+            email: this.state.email,
+            password: this.state.password
+          })
+          .then(() => console.log('POST WORKS'))
+          .then(function (response) {
+            console.log(response);
+            
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+          e.preventDefault();
     }
     render() {
         return (
@@ -40,6 +53,8 @@ export default class Signin extends React.Component {
                 <input type="password" onChange={this.handlePasswordChange} id="inputPassword" className="form-control" placeholder="Password" required />
                 <button className="btn btn-lg btn-primary btn-block" onClick={this.signIn} type="button"> Sign in
                 </button>
+            <Link to="/registration"><button  className="btn btn-lg btn-primary btn-block buttonsInReg">have no account?</button></Link>
+
             </form>
 
             

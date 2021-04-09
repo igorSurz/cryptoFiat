@@ -4,7 +4,9 @@ import Sidebar from './components/sidebar/Sidebar'
 import {BrowserRouter, Route} from 'react-router-dom'
 import ChartPage from './components/chart/chart'
 import MainPage from './components/mainPage/mainPage'
-import Signin from './components/user/userMain'
+import Signin from './components/user/Signin'
+import Registration from './components/user/Registration'
+
 
 export default class App extends React.Component {
  
@@ -12,10 +14,13 @@ export default class App extends React.Component {
   return (
     <BrowserRouter>
     <div className="App">
-      <Signin/>
+      
       <Sidebar/>
+      
       <Route path='/' component={MainPage} exact/>    
       <Route path='/chart' component={ChartPage} exact/>    
+      <Route path='/signin' component={Signin} exact/>  
+      <Route path='/registration' component={Registration} exact/>   
     </div>
     </BrowserRouter>
   );

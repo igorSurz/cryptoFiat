@@ -30,6 +30,9 @@ class Sidebar extends Component {
             <a href="#name"><span className="white-text name">John Doe</span></a>
             <a href="#email"><span className="white-text email">jdandturk@gmail.com</span></a>
           </div></li>
+          <li><Link to='/signin'><i className="material-icons">login</i>Sign in</Link></li>
+          <li><Link to='/registration'><i className="material-icons">app_registration</i>Registration</Link></li>
+
           <li><Link to='/'><i className="material-icons">sync_alt</i>Main Page</Link></li>
 
           <li><a href="#!"><i className="material-icons">sync_alt</i>Buy/Sell Bitcoin</a></li>
@@ -41,6 +44,7 @@ class Sidebar extends Component {
         </ul>
         <a href="#sidenav" data-target="slide-out" className="sidenav-trigger"><i className="ontop material-icons">menu</i></a>
       </>
+      
 
 
 )
