@@ -1,15 +1,27 @@
 import React from 'react'
 import './App.css';
 import Sidebar from './components/sidebar/Sidebar'
+import {BrowserRouter, Route} from 'react-router-dom'
 import ChartPage from './components/chart/chart'
+import MainPage from './components/mainPage/mainPage'
 
-function App() {
+export default class App extends React.Component {
+ 
+ render() {
   return (
+    <BrowserRouter>
     <div>
       <Sidebar/>
-    <ChartPage/>
+      <MainPage/>
+      <Route path='/chart' component={ChartPage}/>    
     </div>
+    </BrowserRouter>
   );
 }
+}
 
-export default App;
+
+
+
+
+
