@@ -1,7 +1,7 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
-// import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 
 
@@ -30,10 +30,15 @@ export default class Signin extends React.Component {
         email: this.state.email,
         password: this.state.password
       };
-      axios
-      .post("/signin", user)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+      try {
+        axios
+        .post('/api/signin', user)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+        
+      } catch (e) {
+        console.log(e)
+      }       
       };
      
     
@@ -50,6 +55,7 @@ export default class Signin extends React.Component {
                 <label htmlFor="inputPassword" className="sr-only"> Password</label>
                 <input type="password" onChange={this.handlePasswordChange} id="inputPassword" className="form-control" placeholder="Password" required />
                 <button className="btn btn-lg btn-primary btn-block" type="submit"> Sign in</button>
+                <Link to="/registration"><button  className="btn btn-lg btn-primary btn-block buttonsInReg">or you create an account?</button></Link>
 
             </form>
 

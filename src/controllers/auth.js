@@ -1,5 +1,4 @@
 //todo some error while postman signin
-
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');

@@ -10,7 +10,7 @@ const authRoutes = require('./src/routes/auth');
 const app = express();
 // db
 mongoose
-  .connect(process.env.DATABASE,{
+  .connect(process.env.MONGODB_URI,{
       useNewUrlParser: true,
       useCreateIndex: true,
       useUnifiedTopology: true
