@@ -1,4 +1,4 @@
-//todo some error while postman singin
+//todo some error while postman signin
 
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
@@ -7,6 +7,7 @@ const {
    createJWT,
 } = require("../utils/auth");
 const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
 exports.signup = (req, res, next) => {
   let { name, email, password, password_confirmation } = req.body;
   let errors = [];
@@ -31,7 +32,7 @@ exports.signup = (req, res, next) => {
     errors.push({ password: "mismatch" });
   }
   if (errors.length > 0) {
-    return res.status(422).json({ errors: errors });
+    return res.status(422).json({ errors});
   }
  User.findOne({email: email})
     .then(user=>{
@@ -77,10 +78,10 @@ exports.signin = (req, res) => {
        errors.push({ email: "invalid email" });
      }
      if (!password) {
-       errors.push({ passwrd: "required" });
+       errors.push({ password: "required" });
      }
      if (errors.length > 0) {
-      return res.status(422).json({ errors: errors });
+      return res.status(422).json({ errors });
      }
      User.findOne({ email: email }).then(user => {
         if (!user) {
@@ -90,33 +91,30 @@ exports.signin = (req, res) => {
         } else {
            bcrypt.compare(password, user.password).then(isMatch => {
               if (!isMatch) {
-               return res.status(400).json({ errors: [{ password:
-"incorrect" }] 
+               return res.status(400).json({ errors: [{ password: "incorrect" }] 
                });
               }
-       let access_token = createJWT(
-          user.email,
-          user._id,
-          3600
-       );
-       jwt.verify(access_token, process.env.TOKEN_SECRET, (err,
-decoded) => {
+       const token = createJWT({email: req.body.email});
+      
+      
+       jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
          if (err) {
-            res.status(500).json({ erros: err });
+            res.status(500).json({ errors});
          }
          if (decoded) {
              return res.status(200).json({
                 success: true,
-                token: access_token,
+                token: token,
                 message: user
              });
            }
          });
         }).catch(err => {
-          res.status(500).json({ erros: err });
+         
+          res.status(500).json({ errors: 'some huyna' });
         });
       }
    }).catch(err => {
-      res.status(500).json({ erros: err });
+      res.status(500).json({ errors: 'pizda' });
    });
 }
