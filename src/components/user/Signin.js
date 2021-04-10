@@ -3,10 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 import {Link} from 'react-router-dom'
 
-
-
-
-
 export default class Signin extends React.Component {
   
         state = {
@@ -32,7 +28,7 @@ export default class Signin extends React.Component {
       };
       try {
         axios
-        .post('/api/signin', user)
+        .post(`http://${process.env.REACT_APP_URL}/api/signin`, user)     //work with full localhost url and port of NOdejs
         .then(res => console.log(res))
         .catch(err => console.log(err));
         
