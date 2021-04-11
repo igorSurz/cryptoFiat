@@ -9,15 +9,49 @@ import {Link} from 'react-router-dom'
 
 
 
-class Sidebar extends Component {
+
+
+export default class Sidebar extends Component {
+  state = {
+    userName: '',
+    userMail:  ' '
+  }
+ 
   componentDidMount() {
     const elem = document.querySelector(".sidenav");
     M.Sidenav.init(elem, {
         edge: "left",
-        inDuration: 250
-       
+        inDuration: 250       
     });
+    console.log(this.state)
+    console.log(typeof(localStorage.userName))
+   
   }
+
+ componentDidUpdate() {
+    console.log('updated')
+  }
+componentWillUnmount() 
+{
+  console.log('unmounted')
+}
+
+ onClickMenu = () => {
+  if (localStorage.length > 0) {   
+    this.setState({
+      userName:  localStorage.userName,
+      userMail:   localStorage.email
+    })
+ } else {
+  this.setState({
+    userName: 'Please logg in',
+    userMail:  ' '
+  })
+
+ } 
+ 
+}
+
   render() {
     return (
       <>
@@ -27,8 +61,8 @@ class Sidebar extends Component {
               <img src={office} alt="office"/>
             </div>
             <a href="#user"><img className="circle" src={yuna} alt="yuna"></img></a>
-            <a href="#name"><span className="white-text name">John Doe</span></a>
-            <a href="#email"><span className="white-text email">jdandturk@gmail.com</span></a>
+            <a href="#name"><span className="white-text name">{this.state.userName}</span></a>
+            <a href="#email"><span className="white-text email">{this.state.userMail}</span></a>
           </div></li>
           <li><Link to='/signin'><i className="material-icons">login</i>Sign in</Link></li>
           <li><Link to='/registration'><i className="material-icons">app_registration</i>Registration</Link></li>
@@ -42,7 +76,7 @@ class Sidebar extends Component {
           <li><div className="divider"></div></li>
           <li><a className="waves-effect" href="#!">Third Link With Waves</a></li>
         </ul>
-        <a href="#sidenav" data-target="slide-out" className="sidenav-trigger"><i className="ontop material-icons">menu</i></a>
+        <a href="#sidenav" data-target="slide-out" className="sidenav-trigger" onClick={this.onClickMenu}><i className="ontop material-icons">menu</i></a>
       </>
       
 
@@ -52,4 +86,3 @@ class Sidebar extends Component {
 }
         
 
-export default Sidebar;
