@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
+const path = require('path');
 //import routes
 const { signup, signin } = require('./src/controllers/auth');
 // const { db } = require('./models/User');
@@ -25,4 +26,12 @@ app.use('/api', signup);
 const port = process.env.PORT || 8000;
 app.listen(port, () => { 
   console.log(`Server is running on ${port}`)
+});
+
+
+
+app.use(express.static(path.join(__dirname,"client", "build")));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname,"client", "build", "index.html"));
 });
