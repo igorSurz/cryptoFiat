@@ -32,7 +32,7 @@ export default class Signin extends React.Component {
       try {   //https heroku required maybe
         
         axios       
-        .post(`https://${process.env.REACT_APP_URL}/api/signin`, user)     //work with full localhost url and port of NOdejs
+        .post(`/api/signin`, user)     //work with full localhost url and port of NOdejs
         .then(res => {
           const candidate = res.data.message
           const {email, name} = candidate
