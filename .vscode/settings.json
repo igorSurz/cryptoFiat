@@ -13,5 +13,6 @@
         "thebulletin",
         "vizualization",
         "yuna"
-    ]
+    ],
+    "git.ignoreLimitWarning": true
 }

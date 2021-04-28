@@ -36,7 +36,7 @@ export default class Signin extends React.Component {
         .then(res => {
           const candidate = res.data.message
           const {email, name} = candidate
-          localStorage.setItem('userName', name)
+          localStorage.setItem('userName', name)   //посмотреть контекст в реакт, это глобальный пропс и не на до локал сторежд
           localStorage.setItem('email', email)     
          this.setState({isLogged: true})  
          console.log(this.state.isLogged)   

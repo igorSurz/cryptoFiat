@@ -34,10 +34,10 @@ exports.signup = (req, res, next) => {
     return res.status(422).json({ errors});
   }
  User.findOne({email: email})
-    .then(user=>{
+    .then(user => {
        if(user){
           return res.status(422).json({ errors: [{ user: "email already exists" }] });
-       }else {
+       } else {
          const user = new User({
            name: name,
            email: email,
