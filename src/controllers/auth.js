@@ -110,10 +110,10 @@ exports.signin = (req, res) => {
          });
         }).catch(err => {
          
-          res.status(500).json({ errors: 'some huyna' });
+          res.status(500).json({ errors: 'Something went wrong jwt' });
         });
       }
    }).catch(err => {
-      res.status(500).json({ errors: 'pizda' });
+      res.status(500).json({ errors: 'Something went wrong' });
    });
 }
