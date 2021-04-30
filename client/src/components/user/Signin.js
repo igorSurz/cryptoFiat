@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 import {Link} from 'react-router-dom'
-// import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import {AuthContext} from '../../context/auth.context'
 
 
@@ -60,11 +60,11 @@ export default function Signin() {
                 <Link to="/registration"><button  className="btn btn-lg btn-primary btn-block buttonsInReg">or you create an account?</button></Link>
 
             </form>
-              {/* <Redirect
+              <Redirect
               to={{
-                pathname: this.state.isLogged ? '/' : '/signin'            
+                pathname: localStorage.length > 0 ? '/' : '/signin'            
               }}
-            /> */}
+            />
           </>
         );
     
