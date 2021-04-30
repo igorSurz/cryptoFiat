@@ -1,46 +1,43 @@
-import React from 'react'
+import React, {useContext, useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 import {Link} from 'react-router-dom'
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
+import {AuthContext} from '../../context/auth.context'
 
 
-export default class Signin extends React.Component {
-  
-        state = {
-          email:'',
-          password:'',
-          isLogged: false
-        };
-     
-   
-   
-    handleEmailChange = e => {
-        this.setState({email: e.target.value})
+export default function Signin() {
+    const auth = useContext(AuthContext)
+    const [form, setForm] = useState({
+      email: '', password: ''
+    })
+       
+    const handleEmailChange = e => {
+       setForm({ ...form, [e.target.email]: e.target.value})
         
     }
-    handlePasswordChange = e =>{
-        this.setState({password: e.target.value})
+   const  handlePasswordChange = e =>{
+    setForm({ ...form, [e.target.password]: e.target.value})
        
     }
-    handleSubmit  = e => {
+   const handleSubmit  = e => {
       e.preventDefault();
-      let user = {        
-        email: this.state.email,
-        password: this.state.password
-      };
-      try {   //https heroku required maybe
-        
+      // let user = {        
+      //   email: this.state.email,
+      //   password: this.state.password
+      // };
+      try {     
+        console.log({...form})      
         axios       
-        .post(`/api/signin`, user)     //work with full localhost url and port of NOdejs
+        .post(`/api/signin`, {...form})   
         .then(res => {
-          const candidate = res.data.message
-          const {email, name} = candidate
-          localStorage.setItem('userName', name)   //посмотреть контекст в реакт, это глобальный пропс и не на до локал сторежд
-          localStorage.setItem('email', email)     
-         this.setState({isLogged: true})  
-         console.log(this.state.isLogged)   
-       
+          // const candidate = res.data.message
+          // const {email, name, _id} = candidate
+          // localStorage.setItem('userName', name)  //may be use global context
+          // localStorage.setItem('email', email)     
+        //  this.setState({isLogged: true})  
+        //  console.log('user', _id, res.data.token)   
+       auth.login(res.data.token, res.data.message._id)
         })
         .catch(err => console.log(err));
               
@@ -51,27 +48,27 @@ export default class Signin extends React.Component {
       };
              
     
-    render() {
+    
         return (
           <>
        
-        <form className="form-signin" onSubmit={this.handleSubmit}>
+        <form className="form-signin" onSubmit={handleSubmit}>
                 <h2 className="form-signin-heading"> Please sign in </h2>
                 <label htmlFor="inputEmail" className="sr-only"> Email address
                 </label>
-                <input type="email" onChange={this.handleEmailChange} id="inputEmail" className="form-control" placeholder="Email address" required autoFocus />
+                <input type="email" name="email" onChange={handleEmailChange} id="inputEmail" className="form-control" placeholder="Email address" required  />
                 <label htmlFor="inputPassword" className="sr-only"> Password</label>
-                <input type="password" onChange={this.handlePasswordChange} id="inputPassword" className="form-control" placeholder="Password" required />
+                <input type="password" name="password" onChange={handlePasswordChange} id="inputPassword" className="form-control" placeholder="Password" required />
                 <button className="btn btn-lg btn-primary btn-block" type="submit"> Sign in</button>
                 <Link to="/registration"><button  className="btn btn-lg btn-primary btn-block buttonsInReg">or you create an account?</button></Link>
 
             </form>
-              <Redirect
+              {/* <Redirect
               to={{
                 pathname: this.state.isLogged ? '/' : '/signin'            
               }}
-            />
+            /> */}
           </>
         );
-    }
+    
 }

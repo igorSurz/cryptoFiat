@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 require('dotenv').config();
 const path = require('path');
 //import routes
@@ -20,7 +19,8 @@ mongoose
    })
   .then(() => console.log('DB Connected'));
 //middlewares
-app.use(bodyParser.json());
+// app.use(bodyParser.json()); //deprecated
+app.use(express.json({ extended: true})) //instead of bodyParser
 app.use(cors());
 //routes middleware
 app.use('/api', authRoutes);
