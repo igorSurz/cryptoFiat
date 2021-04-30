@@ -33,11 +33,10 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-   
-    "server": "node server.js"
-  
-   
-   
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "eslintConfig": {
     "extends": [
@@ -56,5 +55,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.2"
   }
 }
