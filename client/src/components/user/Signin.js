@@ -12,22 +12,19 @@ export default function Signin() {
       email: '', password: ''
     })
        
-    const handleEmailChange = e => {
-       setForm({ ...form, [e.target.email]: e.target.value})
-        
+    const changeHandler = event => {
+      setForm({ ...form, [event.target.name]: event.target.value })
     }
-   const  handlePasswordChange = e =>{
-    setForm({ ...form, [e.target.password]: e.target.value})
        
-    }
-   const handleSubmit  = e => {
+    
+   const signinHandler  = e => {
       e.preventDefault();
       // let user = {        
       //   email: this.state.email,
       //   password: this.state.password
       // };
       try {     
-        console.log({...form})      
+        console.log('etot', {...form})      
         axios       
         .post(`/api/signin`, {...form})   
         .then(res => {
@@ -36,7 +33,7 @@ export default function Signin() {
           // localStorage.setItem('userName', name)  //may be use global context
           // localStorage.setItem('email', email)     
         //  this.setState({isLogged: true})  
-        //  console.log('user', _id, res.data.token)   
+       console.log('user', 'id', res.data.message._id, 'token', res.data.token)   
        auth.login(res.data.token, res.data.message._id)
         })
         .catch(err => console.log(err));
@@ -52,14 +49,14 @@ export default function Signin() {
         return (
           <>
        
-        <form className="form-signin" onSubmit={handleSubmit}>
+        <form className="form-signin">
                 <h2 className="form-signin-heading"> Please sign in </h2>
                 <label htmlFor="inputEmail" className="sr-only"> Email address
                 </label>
-                <input type="email" name="email" onChange={handleEmailChange} id="inputEmail" className="form-control" placeholder="Email address" required  />
+                <input type="email" name="email" onChange={changeHandler} id="inputEmail" className="form-control" placeholder="Email address"  value={form.email} required  />
                 <label htmlFor="inputPassword" className="sr-only"> Password</label>
-                <input type="password" name="password" onChange={handlePasswordChange} id="inputPassword" className="form-control" placeholder="Password" required />
-                <button className="btn btn-lg btn-primary btn-block" type="submit"> Sign in</button>
+                <input type="password" name="password" onChange={changeHandler} id="inputPassword" className="form-control" placeholder="Password"  value={form.password} required />
+                <button className="btn btn-lg btn-primary btn-block" onClick={signinHandler} type="submit"> Sign in</button>
                 <Link to="/registration"><button  className="btn btn-lg btn-primary btn-block buttonsInReg">or you create an account?</button></Link>
 
             </form>

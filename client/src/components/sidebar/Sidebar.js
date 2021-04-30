@@ -23,8 +23,8 @@ export default class Sidebar extends Component {
         edge: "left",
         inDuration: 250       
     });
-    console.log(this.state)
-    console.log(typeof(localStorage.userName))
+    // console.log(this.state)
+    // console.log(typeof(localStorage.userName))
    
   }
 
