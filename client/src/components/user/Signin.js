@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom'
 import { useHistory } from 'react-router-dom';
 import {AuthContext} from '../../context/auth.context'
 
-import './page.css'
 
 export default function Signin() {
     const history = useHistory()
@@ -27,12 +26,11 @@ export default function Signin() {
         .post(`/api/signin`, {...form})   
         .then(res => {
     
-       console.log('user', 'id', res.data.message._id, 'token', res.data.token)   
        auth.login(res.data.token, res.data.message._id, res.data.message.name, res.data.message.email)
          
        history.push('/')
         })
-        .catch(err => console.log(err));
+       
               
       } catch (e) {
         console.log(e)
@@ -43,9 +41,9 @@ export default function Signin() {
     
     
         return (
-          <div className="container">
+          <>
        
-        <form className="form-signin" onSubmit={signinHandler}>
+        <form className="form-signin form-logreg" onSubmit={signinHandler}>
                 <h2 className="form-signin-heading"> Please sign in </h2>
                 <label htmlFor="inputEmail" className="sr-only"> Email address
                 </label>
@@ -57,7 +55,7 @@ export default function Signin() {
 
             </form>
            
-          </div>
+          </>
         );
     
 }

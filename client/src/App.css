@@ -47,3 +47,9 @@
 a:hover {
   text-decoration: none;
 }
+
+.form-logreg {
+  padding-top: 1 rem;
+  width: 500px;
+  margin: 0 auto;
+} 
