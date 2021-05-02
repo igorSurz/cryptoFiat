@@ -1,11 +1,12 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom'
+import './page.css'
 
 export default class Registration extends React.Component{
     render() {
         return (
-          <div>
+          <div className="container">
             <form className="form-signin">
               <h2 className="form-signin-heading">Please sign up</h2>
               <label htmlFor="inputName" className="sr-only">Name</label>

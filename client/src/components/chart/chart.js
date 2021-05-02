@@ -1,5 +1,5 @@
 import React from "react";
-import ChartNew from "./chartNew";
+import ChartNew from "./ChartNew";
 
 
 
