@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
-import { useHistory } from 'react-router-dom';
+
+// import { useHistory } from 'react-router-dom';
 
 export default function Registration() {
-  const history = useHistory()
+  // const history = useHistory()
   const [form, setForm] = useState({
     name: '', email: '', password: '', password_confirmation: ''
   })
@@ -21,16 +22,24 @@ export default function Registration() {
       axios       
       .post(`/api/signup`, {...form})   
       .then(res => {
-        console.log(res.status)
-       
-    history.push('/')
+        console.log(res)      
+    // history.push('/')
       })
-      
-      
-            
+      .catch(function (error) {
+        if (error.response) {
+          // Request made and server responded
+          const e = JSON.stringify(error.response.data.errors[0])
+          console.log(error.response.data.errors[0]);
+          window.M.toast({html: `${e}`, classes: 'card-panel teal lighten-2'})
+     
+          
+        } 
+    
+      });
     } catch (e) {
-      console.log(e)
-
+    console.log(e)  
+   
+    
     }     
     
     };

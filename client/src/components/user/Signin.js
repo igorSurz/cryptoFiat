@@ -33,7 +33,7 @@ export default function Signin() {
        
               
       } catch (e) {
-        console.log(e)
+       
       }     
       
       };
