@@ -2,8 +2,7 @@ import React from 'react'
 import './App.css';
 import Sidebar from './components/sidebar/Sidebar'
 import {Route} from 'react-router-dom'
-import ChartPage from './components/chart/Chart'
-import MainPage from './components/mainPage/MainPage'
+import Dashboard from './components/mainPage/Dashboard'
 import Signin from './components/user/Signin'
 import Registration from './components/user/Registration'
 import {useAuth} from './hooks/auth.hook'
@@ -27,8 +26,7 @@ import {Loader} from './components/loader/Loader'
       
       <Sidebar/>
       
-      <Route path='/' component={MainPage} exact/>    
-      <Route path='/chart' component={ChartPage} exact/>    
+      <Route path='/' component={Dashboard} exact/>    
       <Route path='/signin' component={Signin} exact/>  
       <Route path='/registration' component={Registration} exact/>   
     </div>
