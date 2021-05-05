@@ -8,6 +8,7 @@ import Registration from './components/user/Registration'
 import {useAuth} from './hooks/auth.hook'
 import {AuthContext} from './context/auth.context'
 import {Loader} from './components/loader/Loader'
+import Admin from './srcBlack/layouts/Admin/Admin'
 
 
  function App() {
@@ -24,11 +25,13 @@ import {Loader} from './components/loader/Loader'
     }}>
     <div className="App">
       
-      <Sidebar/>
-      
+      {/* <Sidebar/> */}
+      <Admin/>
+{/*       
       <Route path='/' component={Dashboard} exact/>    
       <Route path='/signin' component={Signin} exact/>  
-      <Route path='/registration' component={Registration} exact/>   
+      <Route path='/registration' component={Registration} exact/>   */}
+
     </div>
     </AuthContext.Provider>
   );
