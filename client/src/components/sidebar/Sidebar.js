@@ -1,60 +1,163 @@
-import {useContext} from "react";
-import React from 'react'
-import "materialize-css/dist/css/materialize.min.css";
-import M from 'materialize-css';
-import office from '../../images/office.jpg'
-import './sidebar.css'
-import {Link, useHistory} from 'react-router-dom'
-import {AuthContext} from '../../context/auth.context'
 
+import React from "react";
+import { NavLink, Link, useLocation } from "react-router-dom";
+// nodejs library to set properties for components
+import { PropTypes } from "prop-types";
 
-export default function Sidebar() {
-  
-  const history = useHistory()
-  const auth = useContext(AuthContext)
-  const {name, uemail} = useContext(AuthContext)
-  
- 
-  const onClickMenu = () => {
-    const elem = document.querySelector(".sidenav");
-    M.Sidenav.init(elem, {
-        edge: "left",
-        inDuration: 250       
-       })}
+// javascript plugin used to create scrollbars on windows
+import PerfectScrollbar from "perfect-scrollbar";
 
-  const logoutHandler = e => {
-    e.preventDefault()
-    auth.logout()
-    history.push('/')
+// reactstrap components
+import { Nav, NavLink as ReactstrapNavLink } from "reactstrap";
+import { BackgroundColorContext } from "../../contexts/BackgroundColorContext";
+
+var ps;
+
+function Sidebar(props) {
+  const location = useLocation();
+  const sidebarRef = React.useRef(null);
+  // verifies if routeName is the one active (in browser input)
+  const activeRoute = (routeName) => {
+    return location.pathname === routeName ? "active" : "";
+  };
+  React.useEffect(() => {
+    if (navigator.platform.indexOf("Win") > -1) {
+      ps = new PerfectScrollbar(sidebarRef.current, {
+        suppressScrollX: true,
+        suppressScrollY: false,
+      });
+    }
+    // Specify how to clean up after this effect:
+    return function cleanup() {
+      if (navigator.platform.indexOf("Win") > -1) {
+        ps.destroy();
+      }
+    };
+  });
+  // const linkOnClick = () => {
+  //   document.documentElement.classList.remove("nav-open");
+  // };
+  const { routes, logo } = props;
+  let logoImg = null;
+  let logoText = null;
+  if (logo !== undefined) {
+    if (logo.outterLink !== undefined) {
+      logoImg = (
+        <a
+          href={logo.outterLink}
+          className="simple-text logo-mini"
+          target="_blank"
+          rel="noreferrer"
+          onClick={props.toggleSidebar}
+        >
+          <div className="logo-img">
+            <img src={logo.imgSrc} alt="react-logo" />
+          </div>
+        </a>
+      );
+      logoText = (
+        <a
+          href={logo.outterLink}
+          className="simple-text logo-normal"
+          target="_blank"
+          rel="noreferrer"
+          onClick={props.toggleSidebar}
+        >
+          {logo.text}
+        </a>
+      );
+    } else {
+      logoImg = (
+        <Link
+          to={logo.innerLink}
+          className="simple-text logo-mini"
+          onClick={props.toggleSidebar}
+        >
+          <div className="logo-img">
+            <img src={logo.imgSrc} alt="react-logo" />
+          </div>
+        </Link>
+      );
+      logoText = (
+        <Link
+          to={logo.innerLink}
+          className="simple-text logo-normal"
+          onClick={props.toggleSidebar}
+        >
+          {logo.text}
+        </Link>
+      );
+    }
   }
-   
-    
-    return (
-      <>
-     
-        <ul id="slide-out" className="sidenav">
-          <><div className="user-view">
-            <div className="background">
-              <img src={office} alt="office"/>
-            </div>
-            {!auth.isAuthenticated && <p className="white-text back">Please signIn or create an account</p>} 
-            {auth.isAuthenticated && <a href="#name"><span className="white-text name">{name}</span></a>} 
-            {auth.isAuthenticated &&  <a href="#email"><span className="white-text email">{uemail}</span></a>} 
-            {auth.isAuthenticated && <li><a className="waves-effect white-text" href="/" onClick={logoutHandler}>Logout</a></li>} 
-              
-          
-          </div></>
-          {!auth.isAuthenticated &&  <li><Link to='/signin'><i className="material-icons">login</i>Sign in</Link></li>} 
-          {!auth.isAuthenticated &&  <li><Link to='/registration'><i className="material-icons">app_registration</i>Registration</Link></li>} 
-         
-         
-          <li><Link to='/'><i className="material-icons">dashboard</i>Dashboard</Link></li>
-          <li><a href="#!"><i className="material-icons">sync_alt</i>Buy/Sell Bitcoin</a></li>
-          <li><a href="#!"><i className="material-icons">cloud</i>Buy Bitcoin</a></li>
-          <li><div className="divider"></div></li>
-         
-        </ul>
-        <a href="#sidenav" data-target="slide-out" className="sidenav-trigger" onClick={onClickMenu}><i className="ontop material-icons">menu</i></a>
-      </>
-      )
+  return (
+    <BackgroundColorContext.Consumer>
+      {({ color }) => (
+        <div className="sidebar" data={color}>
+          <div className="sidebar-wrapper" ref={sidebarRef}>
+            {logoImg !== null || logoText !== null ? (
+              <div className="logo">
+                {logoImg}
+                {logoText}
+              </div>
+            ) : null}
+            <Nav>
+              {routes.map((prop, key) => {
+                if (prop.redirect) return null;
+                return (
+                  <li
+                    className={
+                      activeRoute(prop.path) + (prop.pro ? " active-pro" : "")
+                    }
+                    key={key}
+                  >
+                    <NavLink
+                      to={prop.layout + prop.path}
+                      className="nav-link"
+                      activeClassName="active"
+                      onClick={props.toggleSidebar}
+                    >
+                      <i className={prop.icon} />
+                      <p>{prop.name}</p>
+                    </NavLink>
+                  </li>
+                );
+              })}
+              <li className="active-pro">
+                <ReactstrapNavLink href="https://surzhko.info/">
+                  <i className="tim-icons icon-spaceship" />
+                  <p>Igor Surzhko</p>
+                </ReactstrapNavLink>
+              </li>
+            </Nav>
+          </div>
+        </div>
+      )}
+    </BackgroundColorContext.Consumer>
+  );
 }
+
+Sidebar.defaultProps = {
+ 
+  routes: [{}]
+};
+
+Sidebar.propTypes = {
+
+  // inside the links of this component
+  
+  routes: PropTypes.arrayOf(PropTypes.object),
+  logo: PropTypes.shape({
+    // innerLink is for links that will direct the user within the app
+    // it will be rendered as <Link to="...">...</Link> tag
+    innerLink: PropTypes.string,
+    // outterLink is for links that will direct the user outside the app
+    // it will be rendered as simple <a href="...">...</a> tag
+    outterLink: PropTypes.string,
+    // the text of the logo
+    text: PropTypes.node,
+    // the image src of the logo
+    imgSrc: PropTypes.string,
+  }),
+};
+
+export default Sidebar;
