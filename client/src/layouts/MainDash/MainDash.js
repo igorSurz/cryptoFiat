@@ -16,7 +16,7 @@ import { BackgroundColorContext } from "../../contexts/BackgroundColorContext"
 
 var ps;
 
-function Admin(props) {
+function MainDash(props) {
   const location = useLocation();
   const mainPanelRef = React.useRef(null);
   const [sidebarOpened, setsidebarOpened] = React.useState(
@@ -63,6 +63,7 @@ function Admin(props) {
   };
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
+   
       if (prop.layout === "/p") {
         return (
           <Route
@@ -116,4 +117,4 @@ function Admin(props) {
   );
 }
 
-export default Admin;
+export default MainDash;

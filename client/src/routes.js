@@ -5,6 +5,7 @@ import Notifications from "./views/Notifications.js";
 import Typography from "./views/Typography.js";
 import UserProfile from "./views/UserProfile.js";
 import Offers from "./views/Offers.js"
+import Registration from "./views/Registration.js"
 
 var routes = [
   {
@@ -13,6 +14,15 @@ var routes = [
     icon: "tim-icons icon-chart-pie-36",
     component: Dashboard,
     layout: "/p",
+    
+  },
+  {
+    path: "/registration",
+    name: "Registration",
+    icon: "tim-icons icon-user-run",
+    component: Registration,
+    layout: "/p",
+    
   },
   {
     path: "/offers",
@@ -20,6 +30,7 @@ var routes = [
     icon: "tim-icons icon-credit-card",
     component: Offers,
     layout: "/p",
+   
   },
   {
     path: "/icons",
@@ -27,6 +38,7 @@ var routes = [
     icon: "tim-icons icon-atom",
     component: Icons,
     layout: "/p",
+   
   },
   {
     path: "/notifications",
@@ -34,6 +46,7 @@ var routes = [
     icon: "tim-icons icon-bell-55",
     component: Notifications,
     layout: "/p",
+    
   },
   {
     path: "/user-profile",
@@ -41,6 +54,7 @@ var routes = [
     icon: "tim-icons icon-single-02",
     component: UserProfile,
     layout: "/p",
+    
   },
   {
     path: "/typography",
@@ -48,7 +62,9 @@ var routes = [
     icon: "tim-icons icon-align-center",
     component: Typography,
     layout: "/p",
+   
   },
+
  
 ];
 export default routes;

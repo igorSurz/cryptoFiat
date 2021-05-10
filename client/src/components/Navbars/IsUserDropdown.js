@@ -13,14 +13,19 @@ import {
   Input,
   NavLink,
   Form,
-  FormGroup,
-  FormFeedback
+  FormGroup
   
  
  
 } from "reactstrap";
 
 export const SignedIn = () => {
+  const auth = useContext(AuthContext)
+  const logoutHandler = e => {
+    e.preventDefault()
+    auth.logout()
+  
+  }
  return (
     <UncontrolledDropdown nav>
     <DropdownToggle
@@ -48,7 +53,7 @@ export const SignedIn = () => {
       </NavLink>
       <DropdownItem divider tag="li" />
       <NavLink tag="li">
-        <DropdownItem className="nav-item">Log out</DropdownItem>
+        <DropdownItem className="nav-item" onClick={logoutHandler}>Log out</DropdownItem>
       </NavLink>
     </DropdownMenu>
   </UncontrolledDropdown>
@@ -101,22 +106,16 @@ export default function NotLoggedIn() {
         </DropdownToggle>
         <DropdownMenu className="dropdown-navbar" right tag="ul">
           <Form className="formControlCustom" onSubmit={signinHandler} >
-          <FormGroup >        
-         
-          <Input className="inputCustom"  type="email" name="email" onChange={changeHandler} id="inputEmail" placeholder="Email address"  value={form.email} required   />
-          <FormFeedback valid>looks good</FormFeedback>
-          </FormGroup> 
-          <FormGroup >        
-          <Input className="inputCustom" type="password" name="password" onChange={changeHandler} id="inputPassword"  placeholder="Password"  value={form.password} required />
-          </FormGroup> 
-          <DropdownItem divider tag="li" />
-          
-         
-           <Button type="submit" className="buttonCustom btn-simple  btn btn-info btn-sm ">Log In</Button>
-          
-          
+            <FormGroup >         
+              <Input className="inputCustom"  type="email" name="email" onChange={changeHandler} id="inputEmail" placeholder="Email address"  value={form.email} required   />
+            </FormGroup> 
+            <FormGroup >        
+              <Input className="inputCustom" type="password" name="password" onChange={changeHandler} id="inputPassword"  placeholder="Password"  value={form.password} required />
+            </FormGroup> 
+               <DropdownItem divider tag="li" />
+            <Button type="submit" className="buttonCustom btn-simple  btn btn-info btn-sm ">Log In</Button>
           </Form>
         </DropdownMenu>
-      </UncontrolledDropdown>
+    </UncontrolledDropdown>
   )
 }
