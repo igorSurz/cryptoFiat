@@ -1,5 +1,7 @@
 
-import React, {useContext} from "react";
+import React
+// ,{useContext}
+  from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 // nodejs library to set properties for components
 import { PropTypes } from "prop-types";
@@ -8,7 +10,7 @@ import { PropTypes } from "prop-types";
 import PerfectScrollbar from "perfect-scrollbar";
 
 //context
-import {AuthContext} from '../../contexts/auth.context'
+// import {AuthContext} from '../../contexts/auth.context'
 
 // reactstrap components
 import { Nav, NavLink as ReactstrapNavLink } from "reactstrap";
@@ -17,7 +19,7 @@ import { BackgroundColorContext } from "../../contexts/BackgroundColorContext";
 var ps;
 
 function Sidebar(props) {
-  const {isAuthenticated} = useContext(AuthContext)
+  // const {isAuthenticated} = useContext(AuthContext)
   const location = useLocation();
   const sidebarRef = React.useRef(null);
   // verifies if routeName is the one active (in browser input)
