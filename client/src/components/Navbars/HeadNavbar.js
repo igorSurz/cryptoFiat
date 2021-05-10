@@ -1,7 +1,8 @@
-import React from "react"
+import React, {useContext} from "react"
 import classNames from "classnames"
-import {SignedIn, NotLoggedIn} from "./IsUserDropdown"
-
+import {SignedIn} from "./IsUserDropdown"
+import NotLoggedIn from "./IsUserDropdown"
+import {AuthContext} from "../../contexts/auth.context"
 // reactstrap components
 import {
   Button,
@@ -23,7 +24,7 @@ import {
 } from "reactstrap";
 
 function HeadNavbar(props) {
-  const isAuthenticated = false
+  const {isAuthenticated} = useContext(AuthContext)
   const [collapseOpen, setcollapseOpen] = React.useState(false);
   const [modalSearch, setmodalSearch] = React.useState(false);
   const [color, setcolor] = React.useState("navbar-transparent");

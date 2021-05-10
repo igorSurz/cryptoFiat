@@ -1468,7 +1468,7 @@ pre {
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.42857;
-  color: rgba(255, 255, 255, 0.8);
+  /* color: rgba(255, 255, 255, 0.8); */
   background-color: transparent;
   background-clip: padding-box;
   border: 1px solid #cad1d7;
@@ -1485,9 +1485,9 @@ pre {
     color: transparent;
     text-shadow: 0 0 0 rgba(255, 255, 255, 0.8); }
   .form-control:focus {
-    color: rgba(255, 255, 255, 0.8);
+    /* color: rgba(255, 255, 255, 0.8); */
     background-color: #ffffff;
-    border-color: rgba(50, 151, 211, 0.25);
+    /* border-color: rgba(50, 151, 211, 0.25); */
     outline: 0; }
   .form-control::placeholder {
     color: #adb5bd;
@@ -1503,7 +1503,7 @@ input[type="month"].form-control {
   appearance: none; }
 
 select.form-control:focus::-ms-value {
-  color: rgba(255, 255, 255, 0.8);
+  /* color: rgba(255, 255, 255, 0.8); */
   background-color: transparent; }
 
 .form-control-file,
@@ -9772,7 +9772,7 @@ fieldset[disabled]
   filter: alpha(opacity=100); }
 
 .form-control {
-  border-color: #2b3553;
+  /* border-color: #2b3553; */
   border-radius: 0.4285rem;
   font-size: 0.75rem;
   -webkit-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;

@@ -121,3 +121,21 @@
     content: ""; }
   .offline-doc .page-header:before {
     background-color: rgba(0, 0, 0, 0.8); }
+
+.navLinkText {
+  color: #32325d
+}
+.formControlCustom {
+  padding: 5px ;  
+}
+.inputCustom {
+  color: #32325d;
+
+}
+.buttonCustom {
+  width: 85%;
+  
+
+ 
+  
+}

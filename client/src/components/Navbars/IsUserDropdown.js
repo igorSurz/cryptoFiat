@@ -1,24 +1,23 @@
-import React from "react"
-import classNames from "classnames"
+import React, {useContext, useState} from "react"
+import axios from "axios";
+import { useHistory } from 'react-router-dom';
+import {AuthContext} from '../../contexts/auth.context'
 
 // reactstrap components
 import {
   Button,
-  Collapse,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
   Input,
-  InputGroup,
-  NavbarBrand,
-  Navbar,
   NavLink,
-  Nav,
-  Container,
-  Modal,
-  NavbarToggler,
-  ModalHeader,
+  Form,
+  FormGroup,
+  FormFeedback
+  
+ 
+ 
 } from "reactstrap";
 
 export const SignedIn = () => {
@@ -40,6 +39,7 @@ export const SignedIn = () => {
       <p className="d-lg-none">Log out</p>
     </DropdownToggle>
     <DropdownMenu className="dropdown-navbar" right tag="ul">
+
       <NavLink tag="li">
         <DropdownItem className="nav-item">Profile</DropdownItem>
       </NavLink>
@@ -56,36 +56,67 @@ export const SignedIn = () => {
 }
 
 
-export const NotLoggedIn = () => {
+export default function NotLoggedIn() {
+  const history = useHistory()
+  const auth = useContext(AuthContext)
+  const [form, setForm] = useState({
+      email: '', password: ''
+  })
+       
+    const changeHandler = event => {
+      setForm({ ...form, [event.target.name]: event.target.value })
+    }      
+    
+     const signinHandler  = e => {
+      e.preventDefault();  
+      try {             
+        axios       
+        .post(`/api/signin`, {...form})   
+        .then(res => {    
+         auth.login(res.data.token, res.data.message._id, res.data.message.name, res.data.message.email)
+         history.push('/')
+        })             
+      } catch (e) {}     
+      
+    };         
+    
+
+
   return (
-<UncontrolledDropdown nav>
-    <DropdownToggle
-      caret
-      color="default"
-      nav
-      onClick={(e) => e.preventDefault()}
-    >
-      <div className="photo">
-        <img
-          alt="..."
-          src={require("../../assets/img/default-avatar.png").default}
-        />
-      </div>
-      <b className="caret d-none d-lg-block d-xl-block" />
-      <p className="d-lg-none">Log In</p>
-    </DropdownToggle>
-    <DropdownMenu className="dropdown-navbar" right tag="ul">
-      <NavLink tag="li">
-        <DropdownItem className="nav-item">email</DropdownItem>
-      </NavLink>
-      <NavLink tag="li">
-        <DropdownItem className="nav-item">password</DropdownItem>
-      </NavLink>
-      <DropdownItem divider tag="li" />
-      <NavLink tag="li">
-        <DropdownItem className="nav-item">Log In</DropdownItem>
-      </NavLink>
-    </DropdownMenu>
-  </UncontrolledDropdown>
+    <UncontrolledDropdown nav>
+        <DropdownToggle
+          caret
+          color="default"
+          nav
+          onClick={(e) => e.preventDefault()}
+        >
+          <div className="photo">
+            <img
+              alt="..."
+              src={require("../../assets/img/default-avatar.png").default}
+            />
+          </div>
+          <b className="caret d-none d-lg-block d-xl-block" />
+          <p className="d-lg-none">Log In</p>
+        </DropdownToggle>
+        <DropdownMenu className="dropdown-navbar" right tag="ul">
+          <Form className="formControlCustom" onSubmit={signinHandler} >
+          <FormGroup >        
+         
+          <Input className="inputCustom"  type="email" name="email" onChange={changeHandler} id="inputEmail" placeholder="Email address"  value={form.email} required   />
+          <FormFeedback valid>looks good</FormFeedback>
+          </FormGroup> 
+          <FormGroup >        
+          <Input className="inputCustom" type="password" name="password" onChange={changeHandler} id="inputPassword"  placeholder="Password"  value={form.password} required />
+          </FormGroup> 
+          <DropdownItem divider tag="li" />
+          
+         
+           <Button type="submit" className="buttonCustom btn-simple  btn btn-info btn-sm ">Log In</Button>
+          
+          
+          </Form>
+        </DropdownMenu>
+      </UncontrolledDropdown>
   )
 }
