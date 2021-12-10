@@ -5,7 +5,6 @@ import Typography from './views/Typography.js';
 import UserProfile from './views/UserProfile.js';
 import Offers from './views/Offers.js';
 import Registration from './views/Registration.js';
-import AuthModal from './views/LoginModal/AuthModal.js';
 
 var routes = [
 	{
@@ -15,13 +14,7 @@ var routes = [
 		component: Dashboard,
 		layout: '/p'
 	},
-	{
-		path: '/authentication',
-		name: 'Authentication',
-		icon: 'tim-icons icon-components',
-		component: AuthModal,
-		layout: '/p'
-	},
+
 	{
 		path: '/registration',
 		name: 'Registration',

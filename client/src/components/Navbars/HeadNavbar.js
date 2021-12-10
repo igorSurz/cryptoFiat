@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import classNames from 'classnames';
 import { SignedIn } from './IsUserDropdown';
+import AuthModal from '../LoginModal/AuthModal';
 
 import { AuthContext } from '../../contexts/auth.context';
 // reactstrap components
@@ -91,8 +92,8 @@ function HeadNavbar(props) {
 							</InputGroup>
 							<UncontrolledDropdown nav>
 								<DropdownToggle caret color="default" data-toggle="dropdown" nav>
-									<div className="notification d-none d-lg-block d-xl-block" />
-									<i className="tim-icons icon-sound-wave" />
+									<div className="notification  d-none d-lg-block d-xl-block" />
+									<i className="tim-icons up-notification icon-sound-wave" />
 									<p className="d-lg-none">Notifications</p>
 								</DropdownToggle>
 								<DropdownMenu className="dropdown-navbar" right tag="ul">
@@ -116,7 +117,17 @@ function HeadNavbar(props) {
 								</DropdownMenu>
 							</UncontrolledDropdown>
 							{/* {isAuthenticated ? <SignedIn/> : <NotLoggedIn/>} */}
-							{isAuthenticated ? <SignedIn /> : ''}
+							{isAuthenticated ? (
+								<SignedIn />
+							) : (
+								<InputGroup className="search-bar">
+									<Button color="link" onClick={toggleModalSearch}>
+										<i className="tim-icons icon-single-02" />
+										<span className="d-lg-none d-md-block">SignIn / SignUp</span>
+									</Button>
+								</InputGroup>
+							)}
+							{/* {isAuthenticated ? :  />} */}
 
 							<li className="separator d-lg-none" />
 						</Nav>

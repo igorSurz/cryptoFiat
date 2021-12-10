@@ -40,12 +40,14 @@ a {
 	height: var(--max-height);
 	max-width: var(--max-width);
 	overflow: hidden;
-	position: relative;
-	top: 100px;
+	z-index: 1000;
+	position: absolute;
+	top: 360px;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	width: 100%;
 	align-items: center;
 	background-color: var(--white);
-	/* background: url('https://res.cloudinary.com/dci1eujqw/image/upload/v1616769558/Codepen/waldemar-brandt-aThdSdgx0YM-unsplash_cnq4sb.jpg'); */
 	background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -105,7 +107,6 @@ a {
 	background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.5)),
 		url('https://cf-media.cellebrite.com/wp-content/uploads/2020/09/5-Things-to-Look-for-when-Investigating-Cryptocurrency-Crimes.jpg');
 
-	background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
