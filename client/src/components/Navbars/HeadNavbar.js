@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import classNames from 'classnames';
 import { SignedIn } from './IsUserDropdown';
 import AuthModal from '../LoginModal/AuthModal';
@@ -23,19 +23,29 @@ import {
 	NavbarToggler,
 	ModalHeader
 } from 'reactstrap';
+import { useState } from 'react';
 
 function HeadNavbar(props) {
 	const { isAuthenticated } = useContext(AuthContext);
-	const [collapseOpen, setcollapseOpen] = React.useState(false);
-	const [modalSearch, setmodalSearch] = React.useState(false);
-	const [color, setcolor] = React.useState('navbar-transparent');
-	React.useEffect(() => {
+	const [collapseOpen, setcollapseOpen] = useState(false);
+	const [modalSearch, setmodalSearch] = useState(false);
+	const [isModalAuthOpen, setIsModalAuthOpen] = useState(false);
+
+	const [color, setcolor] = useState('navbar-transparent');
+
+	useEffect(() => {
 		window.addEventListener('resize', updateColor);
 		// Specify how to clean up after this effect:
 		return function cleanup() {
 			window.removeEventListener('resize', updateColor);
 		};
 	});
+
+	useEffect(() => {
+		if (isAuthenticated) {
+			setIsModalAuthOpen(false);
+		}
+	}, [isAuthenticated]);
 	// function that adds color white/transparent to the navbar on resize (this is for the collapse)
 	const updateColor = () => {
 		if (window.innerWidth < 993 && collapseOpen) {
@@ -56,6 +66,10 @@ function HeadNavbar(props) {
 	// this function is to open the Search modal
 	const toggleModalSearch = () => {
 		setmodalSearch(!modalSearch);
+	};
+
+	const toggleModalAuth = () => {
+		setIsModalAuthOpen(!isModalAuthOpen);
 	};
 
 	return (
@@ -116,18 +130,17 @@ function HeadNavbar(props) {
 									</NavLink>
 								</DropdownMenu>
 							</UncontrolledDropdown>
-							{/* {isAuthenticated ? <SignedIn/> : <NotLoggedIn/>} */}
+							{isModalAuthOpen ? <AuthModal /> : ''}
 							{isAuthenticated ? (
 								<SignedIn />
 							) : (
 								<InputGroup className="search-bar">
-									<Button color="link" onClick={toggleModalSearch}>
+									<Button color="link" onClick={toggleModalAuth}>
 										<i className="tim-icons icon-single-02" />
 										<span className="d-lg-none d-md-block">SignIn / SignUp</span>
 									</Button>
 								</InputGroup>
 							)}
-							{/* {isAuthenticated ? :  />} */}
 
 							<li className="separator d-lg-none" />
 						</Nav>
