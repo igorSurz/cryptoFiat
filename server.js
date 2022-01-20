@@ -1,50 +1,50 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const cors = require('cors')
-const path = require('path')
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const path = require('path');
 
 //import routes
-const authRoutes = require('./src/routes/auth')
-const chartRoute = require('./src/routes/chart')
+const authRoutes = require('./src/routes/auth');
+const chartRoute = require('./src/routes/chart');
 
-require('dotenv').config()
+require('dotenv').config();
 
-
-
-// const { db } = require('./models/User') 
+// const { db } = require('./models/User')
 //app
-const app = express()
+const app = express();
 // db
 mongoose
-  .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true
-  })
-  .then(() => console.log('DB Connected'))
+	.connect(process.env.MONGODB_URI, {
+		useNewUrlParser: true,
+		useCreateIndex: true,
+		useUnifiedTopology: true
+	})
+	.then(() => console.log('DB Connected'));
 //middlewares
 // app.use(bodyParser.json())  //deprecated
-app.use(express.json({
-  extended: true
-})) //instead of bodyParser
-app.use(cors())
+app.use(
+	express.json({
+		extended: true
+	})
+); //instead of bodyParser
+app.use(cors());
 //routes middleware
-app.use('/api', authRoutes)
-app.use('/api', chartRoute)
+app.use('/api', authRoutes);
+app.use('/api', chartRoute);
 
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*")
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-  next()
-})
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+	next();
+});
 
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 8000;
 app.listen(port, () => {
-  console.log(`Server is running on ${port}`)
-})
+	console.log(`Server is running on ${port}`);
+});
 
-app.use(express.static(path.join(__dirname, "client", "build")))
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"))
-})
+app.get('/*', (req, res) => {
+	res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+});
