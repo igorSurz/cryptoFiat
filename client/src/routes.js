@@ -6,7 +6,7 @@ import UserProfile from './views/UserProfile.js';
 import Offers from './views/Offers.js';
 import Registration from './views/Registration.js';
 
-var routes = [
+const routes = [
 	{
 		path: '/dashboard',
 		name: 'Dashboard',
