@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import { useAuth } from './hooks/auth.hook';
 import { AuthContext } from './contexts/auth.context';
@@ -29,6 +29,7 @@ function App() {
 					<BrowserRouter>
 						<Switch>
 							<Route path="/" render={props => <MainDash {...props} />} />
+							<Redirect from="/" to="/dashboard" />
 						</Switch>
 					</BrowserRouter>
 				</BackgroundColorWrapper>

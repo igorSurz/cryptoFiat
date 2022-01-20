@@ -87,7 +87,7 @@ function MainDash(props) {
 							/>
 							<Switch>
 								{getRoutes(routes)}
-								<Redirect from="*" to="/dashboard" />
+								<Redirect from="*" to="/" />
 							</Switch>
 							<Footer />
 						</div>
