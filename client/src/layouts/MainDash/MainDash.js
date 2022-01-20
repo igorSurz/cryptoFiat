@@ -62,16 +62,12 @@ function MainDash(props) {
 	};
 	const getRoutes = routes => {
 		return routes.map((prop, key) => {
-			if (prop.layout === '/p') {
-				return <Route path={prop.layout + prop.path} component={prop.component} key={key} />;
-			} else {
-				return null;
-			}
+			return <Route path={prop.path} component={prop.component} key={key} />;
 		});
 	};
 	const getBrandText = path => {
 		for (let i = 0; i < routes.length; i++) {
-			if (location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1) {
+			if (location.pathname.indexOf(routes[i].path) !== -1) {
 				return routes[i].name;
 			}
 		}
@@ -91,7 +87,7 @@ function MainDash(props) {
 							/>
 							<Switch>
 								{getRoutes(routes)}
-								<Redirect from="*" to="/p/dashboard" />
+								<Redirect from="*" to="/dashboard" />
 							</Switch>
 							<Footer />
 						</div>
