@@ -29,7 +29,7 @@ function App() {
 					<BrowserRouter>
 						<Switch>
 							<Route path="/" render={props => <MainDash {...props} />} />
-							<Redirect from="/" to="/dashboard" />
+							<Redirect from="*" to="/" />
 						</Switch>
 					</BrowserRouter>
 				</BackgroundColorWrapper>
