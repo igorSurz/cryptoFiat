@@ -130,7 +130,7 @@ function HeadNavbar(props) {
 									</NavLink>
 								</DropdownMenu>
 							</UncontrolledDropdown>
-							{isModalAuthOpen ? <AuthModal /> : ''}
+							{isModalAuthOpen ? <AuthModal show={toggleModalAuth} /> : ''}
 							{isAuthenticated ? (
 								<SignedIn />
 							) : (
