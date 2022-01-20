@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from 'perfect-scrollbar';
 
@@ -85,10 +85,7 @@ function MainDash(props) {
 								toggleSidebar={toggleSidebar}
 								sidebarOpened={sidebarOpened}
 							/>
-							<Switch>
-								{getRoutes(routes)}
-								<Redirect from="*" to="/" />
-							</Switch>
+							<Switch>{getRoutes(routes)}</Switch>
 							<Footer />
 						</div>
 					</div>
