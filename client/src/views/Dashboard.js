@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // nodejs library that concatenates classes
 import classNames from 'classnames';
 // react plugin used to create charts
 import { Line, Bar } from 'react-chartjs-2';
+
+import axios from 'axios';
 
 // reactstrap components
 import { Button, ButtonGroup, Card, CardHeader, CardBody, CardTitle, Table, Row, Col } from 'reactstrap';
@@ -16,10 +18,35 @@ import {
 } from '../variables/charts.js';
 
 function Dashboard(props) {
-	const [bigChartData, setbigChartData] = React.useState('data1');
+	const [bigChartData, setbigChartData] = useState('data1');
+	const [chartMonth, setChartMonth] = useState();
+	const [chartPrice, setChartPrice] = useState();
+
 	const setBgChartData = name => {
 		setbigChartData(name);
 	};
+
+	useEffect(() => {
+		let fetchData = async () => {
+			await axios.get(`/api/chart`).then(res => {
+				let month = [];
+				let price = [];
+
+				let answer = res.data['Time Series (Digital Currency Monthly)'];
+
+				for (const [key, value] of Object.entries(answer)) {
+					month.unshift(new Date(key).toLocaleString('default', { month: 'short' }));
+
+					price.unshift(parseInt(value['2b. high (USD)']));
+				}
+
+				setChartMonth(month.slice(month.length - 12));
+				setChartPrice(price.slice(price.length - 12));
+			});
+		};
+		fetchData();
+	}, []);
+
 	return (
 		<>
 			<div className="content">
@@ -88,7 +115,11 @@ function Dashboard(props) {
 							</CardHeader>
 							<CardBody>
 								<div className="chart-area">
-									<Line data={chartExample1[bigChartData]} options={chartExample1.options} />
+									<Line
+										id="canvas"
+										data={() => chartExample1.data1(chartMonth, chartPrice)}
+										options={chartExample1.options}
+									/>
 								</div>
 							</CardBody>
 						</Card>

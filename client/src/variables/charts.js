@@ -48,8 +48,9 @@ let chart1_2_options = {
 // #########################################
 // // // used inside src/views/Dashboard.js
 // #########################################
-let chartExample1 = {
-	data1: canvas => {
+export let chartExample1 = {
+	data1: (month, price) => {
+		let canvas = document.getElementById('canvas');
 		let ctx = canvas.getContext('2d');
 
 		let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
@@ -59,7 +60,7 @@ let chartExample1 = {
 		gradientStroke.addColorStop(0, 'rgba(29,140,248,0)'); //blue colors
 
 		return {
-			labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+			labels: month,
 			datasets: [
 				{
 					label: 'Price',
@@ -76,7 +77,7 @@ let chartExample1 = {
 					pointHoverRadius: 4,
 					pointHoverBorderWidth: 15,
 					pointRadius: 4,
-					data: [8500, 9500, 10500, 18570, 40500, 50500, 32300, 55060, 65000, 45080, 51000, 60100]
+					data: price
 				}
 			]
 		};
@@ -151,7 +152,7 @@ let chartExample1 = {
 // #########################################
 // // // used inside src/views/Dashboard.js
 // #########################################
-let chartExample2 = {
+export let chartExample2 = {
 	data: canvas => {
 		let ctx = canvas.getContext('2d');
 
@@ -190,7 +191,7 @@ let chartExample2 = {
 // #########################################
 // // // used inside src/views/Dashboard.js
 // #########################################
-let chartExample3 = {
+export let chartExample3 = {
 	data: canvas => {
 		let ctx = canvas.getContext('2d');
 
@@ -271,7 +272,7 @@ let chartExample3 = {
 // #########################################
 // // // used inside src/views/Dashboard.js
 // #########################################
-const chartExample4 = {
+export const chartExample4 = {
 	data: canvas => {
 		let ctx = canvas.getContext('2d');
 
@@ -359,9 +360,9 @@ const chartExample4 = {
 	}
 };
 
-module.exports = {
-	chartExample1, // in src/views/Dashboard.js
-	chartExample2, // in src/views/Dashboard.js
-	chartExample3, // in src/views/Dashboard.js
-	chartExample4 // in src/views/Dashboard.js
-};
+// module.exports = {
+// 	chartExample1, // in src/views/Dashboard.js
+// 	chartExample2, // in src/views/Dashboard.js
+// 	chartExample3, // in src/views/Dashboard.js
+// 	chartExample4 // in src/views/Dashboard.js
+// };

@@ -1,14 +1,15 @@
-var request = require('request');
+const request = require('request');
 
 exports.chart = (req, res, next) => {
-  request({
-    method: 'GET',
-    uri: 'https://api.blockchain.info/charts/market-price?timespan=50weeks&format=json'
-  }, function (error, response, body) {
-    if (!error && response.statusCode === 200) {
-      res.json(body);
-    }
-  })
-
-
-}
+	request(
+		{
+			method: 'GET',
+			uri: 'https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_MONTHLY&symbol=BTC&market=CNY&apikey=demo'
+		},
+		function (error, response, body) {
+			if (!error && response.statusCode === 200) {
+				res.send(body);
+			}
+		}
+	);
+};
