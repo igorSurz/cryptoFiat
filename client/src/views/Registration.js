@@ -126,14 +126,16 @@ function Registration() {
 									<div className="block block-two" />
 									<div className="block block-three" />
 									<div className="block block-four" />
-									<ArrLeft />
+									<div class="avatarBox">
+										<ArrLeft />
 
-									<img
-										alt="..."
-										className="avatar"
-										src={require(`../assets/img/avatars/${avatar}.png`).default}
-									/>
-									<ArrRight />
+										<img
+											alt="..."
+											className="avatar"
+											src={require(`../assets/img/avatars/${avatar}.png`).default}
+										/>
+										<ArrRight />
+									</div>
 
 									<h5 className="title">Mike Andrew</h5>
 
