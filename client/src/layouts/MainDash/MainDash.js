@@ -68,6 +68,7 @@ function MainDash(props) {
 	const getBrandText = path => {
 		for (let i = 0; i < routes.length; i++) {
 			if (location.pathname.indexOf(routes[i].path) !== -1) {
+				document.title = `Bazar | ${routes[i].name}`;
 				return routes[i].name;
 			}
 		}
