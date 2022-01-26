@@ -9798,6 +9798,7 @@ fieldset[disabled]
   border-color: #2b3553;
   border-radius: 0.4285rem;
   font-size: 0.75rem;
+  color: black;
   -webkit-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
   -moz-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
   -o-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
@@ -9865,7 +9866,7 @@ fieldset[disabled]
 .has-success:after,
 .has-danger:after {
   font-family: 'nucleo';
-  content: "\ea1b";
+  content: '\ea1b';
   display: inline-block;
   position: absolute;
   right: 20px;
@@ -9891,7 +9892,7 @@ fieldset[disabled]
   color: #00f2c3; }
 
 .has-danger:after {
-  content: "\ea48";
+  content: '\ea48';
   color: #ec250d; }
 
 .has-danger.form-check .form-check-label {
@@ -13351,7 +13352,8 @@ textarea.form-control {
   height: 500px; }
 
 .card-user {
-  overflow: hidden; }
+  overflow: hidden;
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5)); }
   .card-user .image {
     height: 120px; }
   .card-user .author {
@@ -13359,7 +13361,24 @@ textarea.form-control {
     text-transform: none;
     margin-top: 25px; }
     .card-user .author a + p.description {
-      margin-top: -7px; }
+      margin-top: -7px;
+      filter: drop-shadow(0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5)); }
+    .card-user .author .title {
+      filter: drop-shadow(0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5)); }
+    .card-user .author .avatar-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      filter: drop-shadow(0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5)); }
+      .card-user .author .avatar-box svg {
+        pointer-events: none; }
+      .card-user .author .avatar-box div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        cursor: pointer; }
     .card-user .author .block {
       position: absolute;
       height: 250px;
@@ -13426,7 +13445,8 @@ textarea.form-control {
     border: 5px solid #2b3553;
     border-bottom-color: transparent;
     background-color: transparent;
-    position: relative; }
+    position: relative;
+    margin: 0 10px 15px 10px; }
   .card-user .card-body {
     min-height: 240px; }
   .card-user hr {
@@ -13435,7 +13455,9 @@ textarea.form-control {
     margin-bottom: 6px;
     text-align: center; }
   .card-user .card-description {
-    margin-top: 30px; }
+    margin-top: 30px;
+    text-align: center;
+    filter: drop-shadow(0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5)); }
 
 .card-tasks {
   height: 473px; }

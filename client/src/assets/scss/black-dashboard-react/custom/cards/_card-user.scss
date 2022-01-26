@@ -1,5 +1,7 @@
 .card-user {
 	overflow: hidden;
+	filter: drop-shadow(0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5));
+
 	.image {
 		height: 120px;
 	}
@@ -11,6 +13,29 @@
 
 		a + p.description {
 			margin-top: -7px;
+			filter: drop-shadow(0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5));
+		}
+		.title {
+			filter: drop-shadow(0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5));
+		}
+
+		.avatar-box {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			filter: drop-shadow(0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5));
+
+			svg {
+				pointer-events: none;
+			}
+			div {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 30px;
+				height: 30px;
+				cursor: pointer;
+			}
 		}
 
 		.block {
@@ -54,6 +79,7 @@
 		border-bottom-color: $transparent-bg;
 		background-color: $transparent-bg;
 		position: relative;
+		margin: 0 10px 15px 10px;
 	}
 
 	.card-body {
@@ -71,5 +97,7 @@
 
 	.card-description {
 		margin-top: 30px;
+		text-align: center;
+		filter: drop-shadow(0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5));
 	}
 }

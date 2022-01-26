@@ -1,7 +1,6 @@
 import Dashboard from './views/Dashboard.js';
 import Icons from './views/Icons.js';
 import Notifications from './views/Notifications.js';
-import UserProfile from './views/UserProfile.js';
 import Offers from './views/Offers.js';
 import Registration from './views/Registration.js';
 
@@ -17,9 +16,9 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 		},
 
 		{
-			path: '/registration',
-			name: 'Registration',
-			icon: 'tim-icons icon-user-run',
+			path: '/editprofile',
+			name: 'Edit Profile',
+			icon: 'tim-icons icon-single-02',
 			component: Registration
 		},
 		{
@@ -39,12 +38,6 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 			name: 'Notifications',
 			icon: 'tim-icons icon-bell-55',
 			component: Notifications
-		},
-		{
-			path: '/user-profile',
-			name: 'User Profile',
-			icon: 'tim-icons icon-single-02',
-			component: UserProfile
 		}
 	];
 } else {
@@ -67,12 +60,6 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 			name: 'Offers',
 			icon: 'tim-icons icon-credit-card',
 			component: Offers
-		},
-		{
-			path: '/user-profile',
-			name: 'User Profile',
-			icon: 'tim-icons icon-single-02',
-			component: UserProfile
 		}
 	];
 }
