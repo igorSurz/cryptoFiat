@@ -5,12 +5,12 @@
 	border-color: lighten($black, 5%);
 	border-radius: $border-radius-lg;
 	font-size: $font-size-sm;
-	color: black;
+
 	@include transition-input-focus-color();
 
 	&:focus {
 		border-color: $primary;
-		background-color: $input-bg;
+		background-color: transparent;
 		@include box-shadow(none);
 
 		& + .input-group-append .input-group-text,
@@ -50,11 +50,6 @@
 	.open & {
 		border-radius: $border-radius-lg $border-radius-lg 0 0;
 		border-bottom-color: $transparent-bg;
-	}
-
-	& + .input-group-append .input-group-text,
-	& + .input-group-prepend .input-group-text {
-		background-color: $white;
 	}
 }
 

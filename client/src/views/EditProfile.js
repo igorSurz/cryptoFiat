@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useState } from 'react';
+import axios from 'axios';
+
+import { AuthContext } from '../contexts/auth.context';
 
 import { ReactComponent as ArrLeft } from '../assets/img/aLeft.svg';
 import { ReactComponent as ArrRight } from '../assets/img/aRight.svg';
@@ -19,7 +22,8 @@ import {
 	Col
 } from 'reactstrap';
 
-function Registration() {
+function EditProfile() {
+	const { userId } = useContext(AuthContext);
 	const [avatarIdx, setAvatarIdx] = useState(1);
 	const [form, setForm] = useState({
 		username: '',
@@ -29,7 +33,8 @@ function Registration() {
 		city: '',
 		country: '',
 		btcWallet: '',
-		additionalInfo: ''
+		additionalInfo: '',
+		avatarIdx: avatarIdx
 	});
 
 	const avatarArrows = e => {
@@ -40,12 +45,29 @@ function Registration() {
 		}
 	};
 
+	useEffect(() => {
+		setForm(prevState => ({ ...prevState, avatarIdx: avatarIdx }));
+	}, [avatarIdx]);
+
 	const handleInputChange = e => {
 		const target = e.target;
-		const value = target.value;
 		const name = target.name;
+		const value = target.value;
+		name === 'username' && value.toLowerCase();
 
 		setForm({ ...form, [name]: value });
+	};
+
+	const handleSubmit = e => {
+		e.preventDefault();
+		try {
+			axios.post(`/api/update`, { ...form, userId }).then(async res => {
+				console.log(res);
+				// let result = await res.data.success;
+				//
+				// history.push('/');
+			});
+		} catch (e) {}
 	};
 
 	return (
@@ -62,10 +84,9 @@ function Registration() {
 									id="registrationForm"
 									action="/"
 									method="POST"
-									//   onSubmit={handleSubmit}
-								>
+									onSubmit={handleSubmit}>
 									<Row>
-										<Col className="px-md-1" md="6">
+										<Col className="pr-md-1" md="6">
 											<FormGroup>
 												<label>Username (visible to other users)</label>
 												<Input
@@ -191,13 +212,12 @@ function Registration() {
 											</FormGroup>
 										</Col>
 									</Row>
+									<Button className="btn-fill" color="primary" type="submit">
+										Save
+									</Button>
 								</Form>
 							</CardBody>
-							<CardFooter>
-								<Button className="btn-fill" color="primary" type="submit">
-									Save
-								</Button>
-							</CardFooter>
+							<CardFooter></CardFooter>
 						</Card>
 					</Col>
 					<Col md="4">
@@ -246,4 +266,4 @@ function Registration() {
 	);
 }
 
-export default Registration;
+export default EditProfile;

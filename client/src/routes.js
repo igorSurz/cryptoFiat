@@ -2,7 +2,7 @@ import Dashboard from './views/Dashboard.js';
 import Icons from './views/Icons.js';
 import Notifications from './views/Notifications.js';
 import Offers from './views/Offers.js';
-import Registration from './views/Registration.js';
+import EditProfile from './views/EditProfile';
 
 let routes = [];
 
@@ -19,7 +19,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 			path: '/editprofile',
 			name: 'Edit Profile',
 			icon: 'tim-icons icon-single-02',
-			component: Registration
+			component: EditProfile
 		},
 		{
 			path: '/offers',
@@ -50,10 +50,10 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 		},
 
 		{
-			path: '/registration',
-			name: 'Registration',
-			icon: 'tim-icons icon-user-run',
-			component: Registration
+			path: '/editprofile',
+			name: 'Edit Profile',
+			icon: 'tim-icons icon-single-02',
+			component: EditProfile
 		},
 		{
 			path: '/offers',

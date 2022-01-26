@@ -8,13 +8,13 @@ const emailRegexp =
 	/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 exports.signup = (req, res, next) => {
-	let { name, email, password, password_confirmation } = req.body;
+	let { username, email, password, password_confirmation } = req.body;
 
 	let errors = [];
 
-	if (!name) {
+	if (!username) {
 		errors.push({
-			name: 'required'
+			username: 'required'
 		});
 	}
 
@@ -68,7 +68,7 @@ exports.signup = (req, res, next) => {
 				});
 			} else {
 				const user = new User({
-					name: name,
+					username: username,
 					email: email,
 					password: password
 				});
@@ -105,6 +105,7 @@ exports.signup = (req, res, next) => {
 				]
 			});
 		});
+	console.log(errors);
 };
 
 exports.signin = (req, res) => {
@@ -194,83 +195,13 @@ exports.signin = (req, res) => {
 		});
 };
 
-exports.finduser = (req, res) => {
-	let { email } = req.body;
+exports.update = async (req, res) => {
+	const updated = {
+		...req.body
+	};
+	const filter = { _id: req.body.userId };
 
-	let errors = [];
+	const updatedDocument = await User.findOneAndUpdate(filter, updated, { new: true });
 
-	if (!email) {
-		errors.push({
-			email: 'required'
-		});
-	}
-
-	if (!emailRegexp.test(email)) {
-		errors.push({
-			email: 'invalid email'
-		});
-	}
-
-	if (errors.length > 0) {
-		return res.status(422).json({
-			errors
-		});
-	}
-
-	User.findOne({
-		email: email
-	})
-		.then(user => {
-			if (!user) {
-				return res.status(404).json({
-					errors: [
-						{
-							user: 'not found'
-						}
-					]
-				});
-			} else {
-				bcrypt
-					.compare(password, user.password)
-					.then(isMatch => {
-						if (!isMatch) {
-							return res.status(400).json({
-								errors: [
-									{
-										password: 'incorrect'
-									}
-								]
-							});
-						}
-						const token = createJWT({
-							email: req.body.email
-						});
-
-						jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
-							if (err) {
-								res.status(500).json({
-									errors
-								});
-							}
-							if (decoded) {
-								return res.status(200).json({
-									success: true,
-									token: token,
-									message: user
-								});
-							}
-						});
-					})
-					.catch(err => {
-						res.status(500).json({
-							errors: 'Something went wrong jwt'
-						});
-					});
-			}
-		})
-		.catch(err => {
-			res.status(500).json({
-				errors: 'Something went wrong'
-			});
-		});
+	return res.status(200).send(updatedDocument);
 };

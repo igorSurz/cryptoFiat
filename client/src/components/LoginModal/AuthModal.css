@@ -38,7 +38,6 @@
 }
 
 .authModal .link {
-	color: var(--gray);
 	font-size: 0.9rem;
 	margin: 1.5rem 0;
 	text-decoration: none;
@@ -51,7 +50,7 @@
 }
 
 .authModal .container {
-	background-color: var(--white);
+	background: #27293d;
 	border-radius: var(--button-radius);
 	box-shadow: 0 0.9rem 1.7rem rgba(0, 0, 0, 0.25), 0 0.7rem 0.7rem rgba(0, 0, 0, 0.22);
 	height: var(--max-height);
@@ -167,7 +166,7 @@
 }
 
 .form {
-	background-color: var(--white);
+	background: #27293d;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -178,11 +177,10 @@
 }
 
 .input {
-	background-color: #fff;
-	border: none;
+	background-color: transparent;
+
 	padding: 0.9rem 0.9rem;
 	margin: 0.3rem 0;
-	width: 100%;
 }
 
 @keyframes show {

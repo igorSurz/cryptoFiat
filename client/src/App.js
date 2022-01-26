@@ -8,7 +8,7 @@ import ThemeContextWrapper from './components/ThemeWrapper/ThemeWrapper';
 import BackgroundColorWrapper from './components/BackgroundColorWrapper/BackgroundColorWrapper';
 
 function App() {
-	const { token, login, logout, userId, ready, name, uemail } = useAuth();
+	const { token, login, logout, userId, ready, name, email } = useAuth();
 	const isAuthenticated = !!token;
 	if (!ready) {
 		//if something not ready I can do some magic here
@@ -22,7 +22,7 @@ function App() {
 				userId,
 				isAuthenticated,
 				name,
-				uemail
+				email
 			}}>
 			<ThemeContextWrapper>
 				<BackgroundColorWrapper>

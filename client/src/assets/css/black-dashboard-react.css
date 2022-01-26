@@ -9798,7 +9798,6 @@ fieldset[disabled]
   border-color: #2b3553;
   border-radius: 0.4285rem;
   font-size: 0.75rem;
-  color: black;
   -webkit-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
   -moz-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
   -o-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
@@ -9834,9 +9833,6 @@ fieldset[disabled]
   .open .form-control {
     border-radius: 0.4285rem 0.4285rem 0 0;
     border-bottom-color: transparent; }
-  .form-control + .input-group-append .input-group-text,
-  .form-control + .input-group-prepend .input-group-text {
-    background-color: #ffffff; }
 
 .has-success .input-group-append .input-group-text,
 .has-success .input-group-prepend .input-group-text,

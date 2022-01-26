@@ -3,31 +3,40 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../contexts/auth.context';
 import { Form, Input } from 'reactstrap';
+
+import Spinner from '../../components/Spinner/Spinner';
 import './AuthModal.css';
 
 const AuthModal = props => {
 	const history = useHistory();
 	const auth = useContext(AuthContext);
 	const [activePanel, setactivePanel] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [form, setForm] = useState({
 		email: '',
 		password: ''
 	});
 
 	const changeHandler = event => {
-		setForm({ ...form, [event.target.name]: event.target.value });
+		setForm({ ...form, [event.target.name]: event.target.value.toLowerCase() });
 	};
 
 	const signInHandler = e => {
 		e.preventDefault();
 		try {
 			axios.post(`/api/signin`, { ...form }).then(res => {
-				auth.login(res.data.token, res.data.message._id, res.data.message.name, res.data.message.email);
+				auth.login(
+					res.data.token,
+					res.data.message._id,
+					res.data.message.name,
+					res.data.message.email
+				);
 				history.push('/');
 			});
 		} catch (e) {}
 	};
 	const signUpHandler = e => {
+		setIsLoading(true);
 		console.log(form);
 		e.preventDefault();
 		try {
@@ -36,6 +45,7 @@ const AuthModal = props => {
 				let result = await res.data.success;
 				if (result) {
 					setactivePanel(prevState => !prevState);
+					setIsLoading(false);
 				}
 
 				// history.push('/');
@@ -67,7 +77,13 @@ const AuthModal = props => {
 					<Form className="form" id="form1" onSubmit={signUpHandler}>
 						<h2 className="form__title">Sign Up</h2>
 
-						<Input type="text" placeholder="User" name="name" onChange={changeHandler} className="input" />
+						<Input
+							type="text"
+							placeholder="User Name"
+							name="username"
+							onChange={changeHandler}
+							className="input"
+						/>
 						<Input
 							type="email"
 							placeholder="Email"
@@ -90,9 +106,13 @@ const AuthModal = props => {
 							className="input"
 						/>
 
-						<button type="submit" className="btn">
-							Sign Up
-						</button>
+						{isLoading ? (
+							<Spinner />
+						) : (
+							<button type="submit" className="btn">
+								Sign Up
+							</button>
+						)}
 					</Form>
 				</div>
 
