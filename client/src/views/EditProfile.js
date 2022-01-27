@@ -24,6 +24,14 @@ import {
 
 function EditProfile() {
 	const { userId } = useContext(AuthContext);
+
+	/////
+	const auth = useContext(AuthContext);
+	console.log('context', auth);
+
+	const [isLoading, setIsLoading] = useState(false);
+	/////
+
 	const [avatarIdx, setAvatarIdx] = useState(1);
 	const [form, setForm] = useState({
 		username: '',
@@ -46,6 +54,14 @@ function EditProfile() {
 	};
 
 	useEffect(() => {
+		try {
+			axios.post(`/api/retrieveuser`, { userId: userId }).then(async res => {
+				if (res.data) setForm(res.data);
+			});
+		} catch (e) {}
+	}, [userId]);
+
+	useEffect(() => {
 		setForm(prevState => ({ ...prevState, avatarIdx: avatarIdx }));
 	}, [avatarIdx]);
 
@@ -60,12 +76,16 @@ function EditProfile() {
 
 	const handleSubmit = e => {
 		e.preventDefault();
+
 		try {
+			for (const key in form) {
+				if (form[key] === '') {
+					delete form[key];
+				}
+			}
 			axios.post(`/api/update`, { ...form, userId }).then(async res => {
-				console.log(res);
-				// let result = await res.data.success;
-				//
-				// history.push('/');
+				// console.log(res);
+				//POP UP SUCCESS MESSAGE IN BOTTOM CORNER
 			});
 		} catch (e) {}
 	};
@@ -89,6 +109,7 @@ function EditProfile() {
 										<Col className="pr-md-1" md="6">
 											<FormGroup>
 												<label>Username (visible to other users)</label>
+
 												<Input
 													value={form.username}
 													name="username"
@@ -163,7 +184,7 @@ function EditProfile() {
 												/>
 											</FormGroup>
 										</Col>
-										<Col className="px-md-1" md="6">
+										<Col className="pl-md-1" md="6">
 											<FormGroup>
 												<label>Country (optional)</label>
 												<Input
@@ -237,10 +258,7 @@ function EditProfile() {
 										<img
 											alt="..."
 											className="avatar"
-											src={
-												require(`../assets/img/avatars/avatar${avatarIdx}.png`)
-													.default
-											}
+											src={require(`../assets/img/avatars/avatar${avatarIdx}.png`)}
 										/>
 										<div id="arrowRight" onClick={avatarArrows}>
 											<ArrRight />

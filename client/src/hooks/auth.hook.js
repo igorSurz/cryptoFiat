@@ -1,47 +1,42 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const storageName = 'userData';
 
 export const useAuth = () => {
-	const [token, setToken] = useState(null);
-	const [name, setName] = useState(null);
-	const [email, setEmail] = useState(null);
-	const [userId, setUserId] = useState(null);
-	const [ready, setReady] = useState(false);
+	const [user, setUser] = useState({
+		token: null,
+		username: null,
+		email: null,
+		userId: null,
+		additionalInfo: null,
+		avatarIdx: null,
+		btcWallet: null,
+		city: null,
+		country: null,
+		fName: null,
+		lName: null
+	});
 
-	const login = useCallback((jwtToken, id, name, email) => {
-		setToken(jwtToken);
-		setUserId(id);
-		setName(name);
-		setEmail(email);
+	const login = (jwtToken, fetchedUser) => {
+		setUser({ token: jwtToken, userId: fetchedUser._id, ...fetchedUser });
 
 		localStorage.setItem(
 			storageName,
-			JSON.stringify({
-				userId: id,
-				token: jwtToken,
-				name: name,
-				email: email
-			})
+			JSON.stringify({ token: jwtToken, userId: fetchedUser._id, ...fetchedUser })
 		);
-	}, []);
+	};
 
-	const logout = useCallback(() => {
-		setToken(null);
-		setUserId(null);
-		setName(null);
-		setEmail(null);
+	const logout = () => {
+		setUser({});
 		localStorage.removeItem(storageName);
-	}, []);
+	};
 
 	useEffect(() => {
 		const data = JSON.parse(localStorage.getItem(storageName));
-
 		if (data && data.token) {
-			login(data.token, data.userId, data.name, data.email);
+			login(data.token, data);
 		}
-		setReady(true);
-	}, [login]);
+	}, []);
 
-	return { login, logout, token, userId, ready, name, email };
+	return { login, logout, ...user };
 };

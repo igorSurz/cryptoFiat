@@ -8,11 +8,24 @@ import ThemeContextWrapper from './components/ThemeWrapper/ThemeWrapper';
 import BackgroundColorWrapper from './components/BackgroundColorWrapper/BackgroundColorWrapper';
 
 function App() {
-	const { token, login, logout, userId, ready, name, email } = useAuth();
+	const {
+		token,
+		login,
+		logout,
+		userId,
+		username,
+		email,
+		additionalInfo,
+		avatarIdx,
+		btcWallet,
+		city,
+		country,
+		fName,
+		lName
+	} = useAuth();
+
 	const isAuthenticated = !!token;
-	if (!ready) {
-		//if something not ready I can do some magic here
-	}
+
 	return (
 		<AuthContext.Provider
 			value={{
@@ -21,8 +34,15 @@ function App() {
 				logout,
 				userId,
 				isAuthenticated,
-				name,
-				email
+				username,
+				email,
+				additionalInfo,
+				avatarIdx,
+				btcWallet,
+				city,
+				country,
+				fName,
+				lName
 			}}>
 			<ThemeContextWrapper>
 				<BackgroundColorWrapper>

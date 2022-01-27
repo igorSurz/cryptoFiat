@@ -25,12 +25,7 @@ const AuthModal = props => {
 		e.preventDefault();
 		try {
 			axios.post(`/api/signin`, { ...form }).then(res => {
-				auth.login(
-					res.data.token,
-					res.data.message._id,
-					res.data.message.name,
-					res.data.message.email
-				);
+				auth.login(res.data.token, res.data.message);
 				history.push('/');
 			});
 		} catch (e) {}

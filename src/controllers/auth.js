@@ -202,6 +202,12 @@ exports.update = async (req, res) => {
 	const filter = { _id: req.body.userId };
 
 	const updatedDocument = await User.findOneAndUpdate(filter, updated, { new: true });
-
 	return res.status(200).send(updatedDocument);
+};
+
+exports.retrieveuser = async (req, res) => {
+	const userId = { _id: req.body.userId };
+	const foundUser = await User.findOne({ ...userId }).exec();
+
+	return res.status(200).send(foundUser);
 };
