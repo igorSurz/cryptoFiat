@@ -34,7 +34,7 @@ let userSchema = new Schema(
 			type: String
 		},
 		avatarIdx: {
-			type: String
+			type: Number
 		}
 	},
 	{

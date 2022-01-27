@@ -32,7 +32,6 @@ function EditProfile() {
 	const [isLoading, setIsLoading] = useState(false);
 	/////
 
-	const [avatarIdx, setAvatarIdx] = useState(1);
 	const [form, setForm] = useState({
 		username: '',
 		fName: '',
@@ -42,14 +41,18 @@ function EditProfile() {
 		country: '',
 		btcWallet: '',
 		additionalInfo: '',
-		avatarIdx: avatarIdx
+		avatarIdx: 1
 	});
 
 	const avatarArrows = e => {
 		if (e.target.id === 'arrowRight') {
-			avatarIdx === 6 ? setAvatarIdx(1) : setAvatarIdx(prevState => prevState + 1);
+			form.avatarIdx === 6
+				? setForm({ ...form, avatarIdx: 1 })
+				: setForm(prevState => ({ ...prevState, avatarIdx: +prevState.avatarIdx + 1 }));
 		} else {
-			avatarIdx === 1 ? setAvatarIdx(6) : setAvatarIdx(prevState => prevState - 1);
+			form.avatarIdx === 1
+				? setForm({ ...form, avatarIdx: 6 })
+				: setForm(prevState => ({ ...prevState, avatarIdx: +prevState.avatarIdx - 1 }));
 		}
 	};
 
@@ -60,10 +63,6 @@ function EditProfile() {
 			});
 		} catch (e) {}
 	}, [userId]);
-
-	useEffect(() => {
-		setForm(prevState => ({ ...prevState, avatarIdx: avatarIdx }));
-	}, [avatarIdx]);
 
 	const handleInputChange = e => {
 		const target = e.target;
@@ -84,7 +83,7 @@ function EditProfile() {
 				}
 			}
 			axios.post(`/api/update`, { ...form, userId }).then(async res => {
-				// console.log(res);
+				auth.update(form);
 				//POP UP SUCCESS MESSAGE IN BOTTOM CORNER
 			});
 		} catch (e) {}
@@ -196,12 +195,6 @@ function EditProfile() {
 												/>
 											</FormGroup>
 										</Col>
-										{/* <Col className="pl-md-1" md="4">
-											<FormGroup>
-												<label>Postal Code (optional)</label>
-												<Input placeholder="ZIP Code" type="number" />
-											</FormGroup>
-										</Col> */}
 									</Row>
 									<Row>
 										<Col md="12">
@@ -258,7 +251,7 @@ function EditProfile() {
 										<img
 											alt="..."
 											className="avatar"
-											src={require(`../assets/img/avatars/avatar${avatarIdx}.png`)}
+											src={require(`../assets/img/avatars/avatar${form.avatarIdx}.png`)}
 										/>
 										<div id="arrowRight" onClick={avatarArrows}>
 											<ArrRight />

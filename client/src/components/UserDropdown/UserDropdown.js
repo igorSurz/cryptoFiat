@@ -11,7 +11,7 @@ import {
 	NavLink
 } from 'reactstrap';
 
-export const SignedIn = () => {
+const UserDropdown = () => {
 	const auth = useContext(AuthContext);
 
 	const logoutHandler = e => {
@@ -22,7 +22,10 @@ export const SignedIn = () => {
 		<UncontrolledDropdown nav>
 			<DropdownToggle caret color="default" nav onClick={e => e.preventDefault()}>
 				<div className="photo">
-					<img alt="..." src={require('../../assets/img/anime3.png')} />
+					<img
+						alt="avatar"
+						src={require(`../../assets/img/avatars/avatar${auth.avatarIdx}.png`)}
+					/>
 				</div>
 				<b className="caret d-none d-lg-block d-xl-block" />
 				<p className="d-lg-none">Log out</p>
@@ -44,3 +47,5 @@ export const SignedIn = () => {
 		</UncontrolledDropdown>
 	);
 };
+
+export default UserDropdown;

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import classNames from 'classnames';
-import { SignedIn } from './IsUserDropdown';
+import UserDropdown from '../UserDropdown/UserDropdown';
 import AuthModal from '../LoginModal/AuthModal';
 
 import { AuthContext } from '../../contexts/auth.context';
@@ -117,27 +117,37 @@ function HeadNavbar(props) {
 										</DropdownItem>
 									</NavLink>
 									<NavLink tag="li">
-										<DropdownItem className="nav-item">You have 5 more tasks</DropdownItem>
+										<DropdownItem className="nav-item">
+											You have 5 more tasks
+										</DropdownItem>
 									</NavLink>
 									<NavLink tag="li">
-										<DropdownItem className="nav-item">Your friend Michael is in town</DropdownItem>
+										<DropdownItem className="nav-item">
+											Your friend Michael is in town
+										</DropdownItem>
 									</NavLink>
 									<NavLink tag="li">
-										<DropdownItem className="nav-item">Another notification</DropdownItem>
+										<DropdownItem className="nav-item">
+											Another notification
+										</DropdownItem>
 									</NavLink>
 									<NavLink tag="li">
-										<DropdownItem className="nav-item">Another one</DropdownItem>
+										<DropdownItem className="nav-item">
+											Another one
+										</DropdownItem>
 									</NavLink>
 								</DropdownMenu>
 							</UncontrolledDropdown>
 							{isModalAuthOpen ? <AuthModal show={toggleModalAuth} /> : ''}
 							{isAuthenticated ? (
-								<SignedIn />
+								<UserDropdown />
 							) : (
 								<InputGroup className="search-bar">
 									<Button color="link" onClick={toggleModalAuth}>
 										<i className="tim-icons icon-single-02" />
-										<span className="d-lg-none d-md-block">SignIn / SignUp</span>
+										<span className="d-lg-none d-md-block">
+											SignIn / SignUp
+										</span>
 									</Button>
 								</InputGroup>
 							)}

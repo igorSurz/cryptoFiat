@@ -31,6 +31,12 @@ export const useAuth = () => {
 		localStorage.removeItem(storageName);
 	};
 
+	const update = newUser => {
+		setUser(prevState => ({ ...prevState, ...newUser }));
+
+		localStorage.setItem(storageName, JSON.stringify({ ...user, ...newUser }));
+	};
+
 	useEffect(() => {
 		const data = JSON.parse(localStorage.getItem(storageName));
 		if (data && data.token) {
@@ -38,5 +44,5 @@ export const useAuth = () => {
 		}
 	}, []);
 
-	return { login, logout, ...user };
+	return { login, logout, update, ...user };
 };
