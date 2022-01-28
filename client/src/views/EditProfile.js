@@ -27,7 +27,7 @@ function EditProfile() {
 
 	/////
 	const auth = useContext(AuthContext);
-	console.log('context', auth);
+	// console.log('context', auth);
 
 	// const [isLoading, setIsLoading] = useState(false);
 	/////

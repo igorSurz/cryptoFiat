@@ -6,7 +6,6 @@ import PerfectScrollbar from 'perfect-scrollbar';
 // core components
 import HeadNavbar from '../../components/Navbars/HeadNavbar.js';
 import Sidebar from '../../components/sidebar/Sidebar.js';
-import FixedPlugin from '../../components/FixedPlugin/FixedPlugin.js';
 import Footer from '../../components/Footer/Footer';
 
 import routes from '../../routes.js';
@@ -76,25 +75,22 @@ function MainDash(props) {
 	};
 	return (
 		<BackgroundColorContext.Consumer>
-			{({ color, changeColor }) => (
-				<React.Fragment>
-					<div className="wrapper">
-						<Sidebar routes={routes} toggleSidebar={toggleSidebar} />
-						<div className="main-panel" ref={mainPanelRef} data={color}>
-							<HeadNavbar
-								brandText={getBrandText(location.pathname)}
-								toggleSidebar={toggleSidebar}
-								sidebarOpened={sidebarOpened}
-							/>
-							<Switch>
-								{getRoutes(routes)}
-								<Redirect from="*" to="/dashboard" />
-							</Switch>
-							<Footer />
-						</div>
+			{({ color }) => (
+				<div className="wrapper">
+					<Sidebar routes={routes} toggleSidebar={toggleSidebar} />
+					<div className="main-panel" ref={mainPanelRef} data={color}>
+						<HeadNavbar
+							brandText={getBrandText(location.pathname)}
+							toggleSidebar={toggleSidebar}
+							sidebarOpened={sidebarOpened}
+						/>
+						<Switch>
+							{getRoutes(routes)}
+							<Redirect from="*" to="/dashboard" />
+						</Switch>
+						<Footer />
 					</div>
-					<FixedPlugin bgColor={color} handleBgClick={changeColor} />
-				</React.Fragment>
+				</div>
 			)}
 		</BackgroundColorContext.Consumer>
 	);

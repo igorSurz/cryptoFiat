@@ -32,11 +32,10 @@ const AuthModal = props => {
 	};
 	const signUpHandler = e => {
 		setIsLoading(true);
-		console.log(form);
+
 		e.preventDefault();
 		try {
 			axios.post(`/api/signup`, { ...form }).then(async res => {
-				console.log(res.data.success);
 				let result = await res.data.success;
 				if (result) {
 					setactivePanel(prevState => !prevState);
@@ -60,6 +59,7 @@ const AuthModal = props => {
 	};
 
 	const classValue = activePanel ? 'right-panel-active' : '';
+
 	return (
 		<div className="authModal">
 			<div onClick={props.show} className="authModalOverlay"></div>
