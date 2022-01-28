@@ -1,5 +1,4 @@
-import React from // ,{useContext}
-'react';
+import React from 'react'; // ,{useContext}
 import { NavLink, Link, useLocation } from 'react-router-dom';
 // nodejs library to set properties for components
 import { PropTypes } from 'prop-types';
@@ -70,14 +69,20 @@ function Sidebar(props) {
 			);
 		} else {
 			logoImg = (
-				<Link to={logo.innerLink} className="simple-text logo-mini" onClick={props.toggleSidebar}>
+				<Link
+					to={logo.innerLink}
+					className="simple-text logo-mini"
+					onClick={props.toggleSidebar}>
 					<div className="logo-img">
 						<img src={logo.imgSrc} alt="react-logo" />
 					</div>
 				</Link>
 			);
 			logoText = (
-				<Link to={logo.innerLink} className="simple-text logo-normal" onClick={props.toggleSidebar}>
+				<Link
+					to={logo.innerLink}
+					className="simple-text logo-normal"
+					onClick={props.toggleSidebar}>
 					{logo.text}
 				</Link>
 			);
@@ -97,9 +102,13 @@ function Sidebar(props) {
 						<Nav>
 							{routes.map((prop, key) => {
 								if (prop.redirect) return null;
-
+								if (prop.path === '/editprofile') return null;
 								return (
-									<li className={activeRoute(prop.path) + (prop.pro ? ' active-pro' : '')} key={key}>
+									<li
+										className={
+											activeRoute(prop.path) + (prop.pro ? ' active-pro' : '')
+										}
+										key={key}>
 										<NavLink
 											to={prop.path}
 											className="nav-link"

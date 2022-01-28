@@ -117,7 +117,7 @@
 
 .authModal .overlay {
 	background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.5)),
-		url('https://cf-media.cellebrite.com/wp-content/uploads/2020/09/5-Things-to-Look-for-when-Investigating-Cryptocurrency-Crimes.jpg');
+		url('../../assets/img/Cryptocurrency.jpeg');
 
 	background-position: center;
 	background-repeat: no-repeat;
