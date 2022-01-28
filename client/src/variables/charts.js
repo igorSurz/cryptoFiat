@@ -1,14 +1,12 @@
 // chartExample1 and chartExample2 options
 let chart1_2_options = {
-	maintainAspectRatio: false,
-	plugins: {
-		legend: {
-			display: false
-		}
+	maintainAspectRatio: true,
+	legend: {
+		display: false
 	},
 
 	tooltips: {
-		enabled: false
+		enabled: true
 	},
 	responsive: true,
 	scales: {
@@ -92,7 +90,20 @@ export let chartExample1 = {
 		gradientStroke.addColorStop(0, 'rgba(29,140,248,0)'); //blue colors
 
 		return {
-			labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+			labels: [
+				'JAN',
+				'FEB',
+				'MAR',
+				'APR',
+				'MAY',
+				'JUN',
+				'JUL',
+				'AUG',
+				'SEP',
+				'OCT',
+				'NOV',
+				'DEC'
+			],
 			datasets: [
 				{
 					label: 'My First dataset',
@@ -124,7 +135,20 @@ export let chartExample1 = {
 		gradientStroke.addColorStop(0, 'rgba(29,140,248,0)'); //blue colors
 
 		return {
-			labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+			labels: [
+				'JAN',
+				'FEB',
+				'MAR',
+				'APR',
+				'MAY',
+				'JUN',
+				'JUL',
+				'AUG',
+				'SEP',
+				'OCT',
+				'NOV',
+				'DEC'
+			],
 			datasets: [
 				{
 					label: 'My First dataset',
@@ -220,10 +244,9 @@ export let chartExample3 = {
 	},
 	options: {
 		maintainAspectRatio: false,
-		plugins: {
-			legend: {
-				display: false
-			}
+
+		legend: {
+			display: false
 		},
 		tooltips: {
 			backgroundColor: '#f5f5f5',
@@ -307,10 +330,9 @@ export const chartExample4 = {
 	},
 	options: {
 		maintainAspectRatio: false,
-		plugins: {
-			legend: {
-				display: false
-			}
+
+		legend: {
+			display: false
 		},
 
 		tooltips: {
