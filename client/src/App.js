@@ -1,3 +1,10 @@
+//TODO
+// - User rating
+// - User wallet sidebar
+//----------------------
+//ONGOING
+//deal room with chat
+
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 

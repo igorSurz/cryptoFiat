@@ -3,6 +3,7 @@ import Icons from './views/Icons.js';
 import Notifications from './views/Notifications.js';
 import Offers from './views/Offers.js';
 import EditProfile from './views/EditProfile';
+import DealRoom from './views/DealRoom';
 
 let routes = [];
 
@@ -26,6 +27,12 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 			name: 'Offers',
 			icon: 'tim-icons icon-credit-card',
 			component: Offers
+		},
+		{
+			path: '/dealroom',
+			name: 'Deal Room',
+			icon: 'tim-icons icon-credit-card',
+			component: DealRoom
 		},
 		{
 			path: '/icons',
