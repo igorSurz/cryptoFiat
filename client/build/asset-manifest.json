@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.css": "/static/css/main.465845bf.css",
-    "main.js": "/static/js/main.757b5029.js",
+    "main.css": "/static/css/main.7a18eda6.css",
+    "main.js": "/static/js/main.988e9b65.js",
     "static/media/—Pngtree—people avatars collection vector default_5204699.png": "/static/media/—Pngtree—people avatars collection vector default_5204699.9b014f6884d727c08f52.png",
+    "static/media/Cryptocurrency.jpeg": "/static/media/Cryptocurrency.b8a299bd57361c0f4edd.jpeg",
     "static/media/fa-solid-900.svg": "/static/media/fa-solid-900.13de59f1a36b6cb4bca0.svg",
     "static/media/fa-brands-400.svg": "/static/media/fa-brands-400.216edb96b562c79adc09.svg",
     "static/media/—Pngtree—set of people avatar icons_4860318.png": "/static/media/—Pngtree—set of people avatar icons_4860318.82b0502eaab7f30ee315.png",
@@ -33,11 +34,11 @@
     "index.html": "/index.html",
     "static/media/aLeft.svg": "/static/media/aLeft.86890a1acecd168394d7792fbbc754be.svg",
     "static/media/aRight.svg": "/static/media/aRight.441ce4d13a4f17fa1209336f1faccde3.svg",
-    "main.465845bf.css.map": "/static/css/main.465845bf.css.map",
-    "main.757b5029.js.map": "/static/js/main.757b5029.js.map"
+    "main.7a18eda6.css.map": "/static/css/main.7a18eda6.css.map",
+    "main.988e9b65.js.map": "/static/js/main.988e9b65.js.map"
   },
   "entrypoints": [
-    "static/css/main.465845bf.css",
-    "static/js/main.757b5029.js"
+    "static/css/main.7a18eda6.css",
+    "static/js/main.988e9b65.js"
   ]
 }

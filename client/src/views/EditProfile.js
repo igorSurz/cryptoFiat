@@ -23,10 +23,10 @@ import {
 } from 'reactstrap';
 
 function EditProfile() {
-	const { userId } = useContext(AuthContext);
+	const { userId, avatarIdx, update } = useContext(AuthContext);
 
 	/////
-	const auth = useContext(AuthContext);
+
 	// console.log('context', auth);
 
 	// const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +41,7 @@ function EditProfile() {
 		country: '',
 		btcWallet: '',
 		additionalInfo: '',
-		avatarIdx: 1
+		avatarIdx: avatarIdx
 	});
 
 	const avatarArrows = e => {
@@ -83,7 +83,7 @@ function EditProfile() {
 				}
 			}
 			axios.post(`/api/update`, { ...form, userId }).then(async res => {
-				auth.update(form);
+				update(form);
 				//POP UP SUCCESS MESSAGE IN BOTTOM CORNER
 			});
 		} catch (e) {}
@@ -110,6 +110,7 @@ function EditProfile() {
 												<label>Username (visible to other users)</label>
 
 												<Input
+													disabled
 													value={form.username}
 													name="username"
 													onChange={handleInputChange}
@@ -124,6 +125,7 @@ function EditProfile() {
 													Email address
 												</label>
 												<Input
+													disabled
 													value={form.email}
 													name="email"
 													onChange={handleInputChange}
@@ -244,18 +246,22 @@ function EditProfile() {
 									<div className="block block-three" />
 									<div className="block block-four" />
 									<div className="avatar-box">
-										<div id="arrowLeft" onClick={avatarArrows}>
-											<ArrLeft />
-										</div>
+										{form.avatarIdx && (
+											<>
+												<div id="arrowLeft" onClick={avatarArrows}>
+													<ArrLeft />
+												</div>
 
-										<img
-											alt="..."
-											className="avatar"
-											src={require(`../assets/img/avatars/avatar${form.avatarIdx}.png`)}
-										/>
-										<div id="arrowRight" onClick={avatarArrows}>
-											<ArrRight />
-										</div>
+												<img
+													alt=""
+													className="avatar"
+													src={require(`../assets/img/avatars/avatar${form.avatarIdx}.png`)}
+												/>
+												<div id="arrowRight" onClick={avatarArrows}>
+													<ArrRight />
+												</div>
+											</>
+										)}
 									</div>
 
 									<h5 className="title">{form.username}</h5>
