@@ -31,7 +31,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 		{
 			path: '/dealroom',
 			name: 'Deal Room',
-			icon: 'tim-icons icon-credit-card',
+			icon: 'tim-icons icon-chat-33',
 			component: DealRoom
 		},
 		{
@@ -67,6 +67,12 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 			name: 'Offers',
 			icon: 'tim-icons icon-credit-card',
 			component: Offers
+		},
+		{
+			path: '/dealroom',
+			name: 'Deal Room',
+			icon: 'tim-icons icon-chat-33',
+			component: DealRoom
 		}
 	];
 }
