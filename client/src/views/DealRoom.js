@@ -1,9 +1,81 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // reactstrap components
-import { Card, CardHeader, CardBody, CardTitle, Table, Row, Col } from 'reactstrap';
+import {
+	Card,
+	CardHeader,
+	CardBody,
+	CardTitle,
+	Table,
+	Row,
+	Col,
+	Button,
+	FormGroup,
+	Form,
+	Input
+} from 'reactstrap';
+
+import Chat from '../components/Chat/Chat';
 
 function DealRoom() {
+	const [isSetUser, setIsSetUser] = useState(false);
+
+	const [user, setUser] = useState({ name: '', room: '' });
+
+	const chatDataFormHandler = () => {
+		setIsSetUser(true);
+		console.log('BADUMTS');
+	};
+
+	const handleInputChange = e => {
+		const target = e.target;
+		const name = target.name;
+		const value = target.value;
+		setUser({ ...user, [name]: value });
+	};
+
+	const chatDataForm = () => {
+		return (
+			<>
+				<Form>
+					<Row>
+						<Col className="pr-md-1" md="6">
+							<FormGroup>
+								<label>Username</label>
+								<Input
+									value={user.name}
+									name="name"
+									onChange={handleInputChange}
+									placeholder="Username"
+									type="text"
+								/>
+							</FormGroup>
+						</Col>
+						<Col className="pl-md-1" md="6">
+							<FormGroup>
+								<label htmlFor="exampleInputEmail1">Chat Room</label>
+								<Input
+									value={user.room}
+									name="room"
+									onChange={handleInputChange}
+									placeholder="Enter you room"
+									type="text"
+								/>
+							</FormGroup>
+						</Col>
+					</Row>
+				</Form>
+				<Button
+					className="btn-fill"
+					color="primary"
+					type="submit"
+					onClick={chatDataFormHandler}>
+					Save
+				</Button>
+			</>
+		);
+	};
+
 	return (
 		<>
 			<div className="content">
@@ -11,8 +83,8 @@ function DealRoom() {
 					<Col md="6">
 						<Card>
 							<CardHeader>
-								<CardTitle tag="h4">Buyers</CardTitle>
-								<p className="category">Here you can sell your cryptocurrency</p>
+								<CardTitle tag="h4">Deal Information</CardTitle>
+								<p className="category">PLease double check the conditions</p>
 							</CardHeader>
 							<CardBody>
 								<Table className="table-hover table-active" responsive>
@@ -33,53 +105,18 @@ function DealRoom() {
 												<i className="tim-icons icon-shape-star" />
 												<i className="tim-icons icon-shape-star" />
 											</td>
-											<td>Niger</td>
+											<td>Izrailovka</td>
 											<td>Oud</td>
 											<td className="text-center">$36,738</td>
 											<td className="text-center">B 0,6679</td>
 										</tr>
-										<tr>
+										{/* <tr>
 											<td>Minerva Hooper</td>
 											<td>Curaçao</td>
 											<td>Sinaai-Waas</td>
 											<td className="text-center">$23,789</td>
 											<td className="text-center">B 0,6679</td>
-										</tr>
-										<tr>
-											<td>Sage Rodriguez</td>
-											<td>Netherlands</td>
-											<td>Baileux</td>
-											<td className="text-center">$56,142</td>
-											<td className="text-center">B 0,6679</td>
-										</tr>
-										<tr>
-											<td>Philip Chaney</td>
-											<td>Korea, South</td>
-											<td>Overland Park</td>
-											<td className="text-center">$38,735</td>
-											<td className="text-center">B 0,6679</td>
-										</tr>
-										<tr>
-											<td>Doris Greene</td>
-											<td>Malawi</td>
-											<td>Feldkirchen in Kärnten</td>
-											<td className="text-center">$63,542</td>
-											<td className="text-center">B 0,6679</td>
-										</tr>
-										<tr>
-											<td>Mason Porter</td>
-											<td>Chile</td>
-											<td>Gloucester</td>
-											<td className="text-center">$78,615</td>
-											<td className="text-center">B 0,6679</td>
-										</tr>
-										<tr>
-											<td>Jon Porter</td>
-											<td>Portugal</td>
-											<td>Gloucester</td>
-											<td className="text-center">$98,615</td>
-											<td className="text-center">B 0,6679</td>
-										</tr>
+										</tr> */}
 									</tbody>
 								</Table>
 							</CardBody>
@@ -90,10 +127,16 @@ function DealRoom() {
 							<CardHeader>
 								<CardTitle tag="h4">Chat</CardTitle>
 								<p className="category">
-									Please close the deal in this chat with your friend{' '}
+									Please close the deal in this chat with your friend
 								</p>
 							</CardHeader>
-							<CardBody></CardBody>
+							<CardBody>
+								{isSetUser ? (
+									<Chat name={user.name} room={user.room} />
+								) : (
+									chatDataForm()
+								)}
+							</CardBody>
 						</Card>
 					</Col>
 				</Row>

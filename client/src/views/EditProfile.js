@@ -26,9 +26,6 @@ function EditProfile() {
 	const auth = useContext(AuthContext);
 
 	/////
-
-	// console.log('context', auth);
-
 	// const [isLoading, setIsLoading] = useState(false);
 	/////
 
@@ -55,10 +52,6 @@ function EditProfile() {
 				: setForm(prevState => ({ ...prevState, avatarIdx: +prevState.avatarIdx - 1 }));
 		}
 	};
-
-	// useEffect(() => {
-	// 	setForm(auth);
-	// }, [auth]);
 
 	useEffect(() => {
 		try {
@@ -164,17 +157,6 @@ function EditProfile() {
 											</FormGroup>
 										</Col>
 									</Row>
-									{/* <Row>
-										<Col md="12">
-											<FormGroup>
-												<label>Address (optional)</label>
-												<Input
-													placeholder="Belkin str 132/25"
-													type="text"
-												/>
-											</FormGroup>
-										</Col>
-									</Row> */}
 									<Row>
 										<Col className="pr-md-1" md="6">
 											<FormGroup>
