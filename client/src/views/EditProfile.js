@@ -23,7 +23,7 @@ import {
 } from 'reactstrap';
 
 function EditProfile() {
-	const { userId, avatarIdx, update } = useContext(AuthContext);
+	const auth = useContext(AuthContext);
 
 	/////
 
@@ -41,7 +41,7 @@ function EditProfile() {
 		country: '',
 		btcWallet: '',
 		additionalInfo: '',
-		avatarIdx: avatarIdx
+		avatarIdx: auth.avatarIdx
 	});
 
 	const avatarArrows = e => {
@@ -56,13 +56,17 @@ function EditProfile() {
 		}
 	};
 
+	// useEffect(() => {
+	// 	setForm(auth);
+	// }, [auth]);
+
 	useEffect(() => {
 		try {
-			axios.post(`/api/retrieveuser`, { userId: userId }).then(async res => {
+			axios.post(`/api/retrieveuser`, { userId: auth.userId }).then(async res => {
 				if (res.data) setForm(res.data);
 			});
 		} catch (e) {}
-	}, [userId]);
+	}, [auth]);
 
 	const handleInputChange = e => {
 		const target = e.target;
@@ -75,18 +79,17 @@ function EditProfile() {
 
 	const handleSubmit = e => {
 		e.preventDefault();
-
 		try {
-			for (const key in form) {
-				if (form[key] === '') {
-					delete form[key];
-				}
-			}
+			let userId = auth.userId;
+
 			axios.post(`/api/update`, { ...form, userId }).then(async res => {
-				update(form);
+				console.log('res', res.data);
+				auth.update(res.data);
 				//POP UP SUCCESS MESSAGE IN BOTTOM CORNER
 			});
-		} catch (e) {}
+		} catch (e) {
+			console.log('error', e);
+		}
 	};
 
 	return (
