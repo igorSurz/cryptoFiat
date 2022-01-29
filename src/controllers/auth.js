@@ -70,7 +70,14 @@ exports.signup = (req, res, next) => {
 				const user = new User({
 					username: username,
 					email: email,
-					password: password
+					password: password,
+					fName: '',
+					lName: '',
+					city: '',
+					country: '',
+					btcWallet: '',
+					additionalInfo: '',
+					avatarIdx: 1
 				});
 				bcrypt.genSalt(10, function (err, salt) {
 					bcrypt.hash(password, salt, function (err, hash) {

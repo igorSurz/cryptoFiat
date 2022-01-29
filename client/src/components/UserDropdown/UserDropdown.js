@@ -37,7 +37,9 @@ const UserDropdown = () => {
 							<div className="photo">
 								<img
 									alt="avatar"
-									src={require(`../../assets/img/avatars/avatar${auth.avatarIdx}.png`)}
+									src={require(`../../assets/img/avatars/avatar${
+										auth.avatarIdx ? auth.avatarIdx : 1
+									}.png`)}
 								/>
 							</div>
 							<b className="caret d-none d-lg-block d-xl-block" />

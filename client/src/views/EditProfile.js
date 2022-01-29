@@ -231,22 +231,21 @@ function EditProfile() {
 									<div className="block block-three" />
 									<div className="block block-four" />
 									<div className="avatar-box">
-										{form.avatarIdx && (
-											<>
-												<div id="arrowLeft" onClick={avatarArrows}>
-													<ArrLeft />
-												</div>
-
+										<>
+											<div id="arrowLeft" onClick={avatarArrows}>
+												<ArrLeft />
+											</div>
+											{form.avatarIdx && (
 												<img
 													alt=""
 													className="avatar"
 													src={require(`../assets/img/avatars/avatar${form.avatarIdx}.png`)}
 												/>
-												<div id="arrowRight" onClick={avatarArrows}>
-													<ArrRight />
-												</div>
-											</>
-										)}
+											)}
+											<div id="arrowRight" onClick={avatarArrows}>
+												<ArrRight />
+											</div>
+										</>
 									</div>
 
 									<h5 className="title">{form.username}</h5>
