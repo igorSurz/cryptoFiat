@@ -4,6 +4,7 @@ import Notifications from './views/Notifications.js';
 import Offers from './views/Offers.js';
 import EditProfile from './views/EditProfile';
 import DealRoom from './views/DealRoom';
+import NewOffer from './views/NewOffer';
 
 let routes = [];
 
@@ -27,6 +28,12 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 			name: 'Offers',
 			icon: 'tim-icons icon-credit-card',
 			component: Offers
+		},
+		{
+			path: '/newoffer',
+			name: 'New Offer',
+			icon: 'tim-icons icon-cart',
+			component: NewOffer
 		},
 		{
 			path: '/dealroom',
@@ -67,6 +74,12 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 			name: 'Offers',
 			icon: 'tim-icons icon-credit-card',
 			component: Offers
+		},
+		{
+			path: '/newoffer',
+			name: 'New Offer',
+			icon: 'tim-icons icon-cart',
+			component: NewOffer
 		},
 		{
 			path: '/dealroom',

@@ -50,6 +50,4 @@ exports.newDeal = (req, res, next) => {
 				]
 			});
 		});
-
-	console.log(errors);
 };

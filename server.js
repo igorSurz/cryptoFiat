@@ -11,6 +11,7 @@ const { addUser, removeUser } = require('./user');
 const authRoutes = require('./src/routes/auth');
 const chartRoute = require('./src/routes/chart');
 const dealsRoute = require('./src/routes/deals');
+const offersRoute = require('./src/routes/offers');
 
 require('dotenv').config();
 
@@ -42,6 +43,7 @@ app.use(cors());
 app.use('/api', authRoutes);
 app.use('/api', chartRoute);
 app.use('/api', dealsRoute);
+app.use('/api', offersRoute);
 
 app.use(function (req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');

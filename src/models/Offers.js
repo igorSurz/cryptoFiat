@@ -1,21 +1,25 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let dealsList = new Schema(
+let offer = new Schema(
 	{
-		buyerId: {
+		userId: {
 			type: String,
 			required: true
 		},
-		sellerId: {
+		status: {
 			type: String,
 			required: true
 		},
-		buyerName: {
+		username: {
 			type: String,
 			required: true
 		},
-		sellerName: {
+		fName: {
+			type: String,
+			required: true
+		},
+		lName: {
 			type: String,
 			required: true
 		},
@@ -27,18 +31,31 @@ let dealsList = new Schema(
 			type: String,
 			required: true
 		},
-		amountBtc: {
+		currency: {
+			type: String,
+			required: true
+		},
+		currencyAmount: {
 			type: Number,
 			required: true
 		},
-		currentBtcPrice: {
+		currentCurPrice: {
 			type: Number
+		},
+		userPrice: {
+			type: Number
+		},
+		conditions: {
+			type: String
+		},
+		sellerWallet: {
+			type: String
 		}
 	},
 	{
 		timestamps: true,
-		collection: 'dealsList'
+		collection: 'offers'
 	}
 );
 
-module.exports = mongoose.model('Deals', dealsList);
+module.exports = mongoose.model('Offer', offer);
