@@ -46,7 +46,6 @@ function NewOffer() {
 	});
 
 	useEffect(() => {
-		console.log(auth);
 		try {
 			axios.get(`/api/price`).then(async res => {
 				if (res.data) {
@@ -78,8 +77,6 @@ function NewOffer() {
 		}
 	}, [auth, setForm]);
 
-	console.log('tam', form);
-
 	const handleInputChange = e => {
 		const target = e.target;
 		const name = target.name;
@@ -92,8 +89,6 @@ function NewOffer() {
 		e.preventDefault();
 		try {
 			axios.post(`/api/newoffer`, { ...form }).then(async res => {
-				console.log(res);
-
 				//POP UP SUCCESS MESSAGE IN BOTTOM CORNER
 			});
 		} catch (e) {
@@ -264,28 +259,38 @@ function NewOffer() {
 								<CardText />
 								<div className="author">
 									<div className="block block-one" />
-									<div className="block block-two" />
-									<div className="block block-three" />
+									{/* <div className="block block-two" /> */}
+									{/* <div className="block block-three" /> */}
 									<div className="block block-four" />
-
-									<h5 className="title">{form.username}</h5>
-
-									<p className="description">
-										{form.fName} {form.lName}
+									<h5 className="title">Please double check your information</h5>
+									<p className="title">
+										{form.status ? 'You are:' : ''} {form.status}
 									</p>
-									<p className="description">
-										{form.country} {form.city}
+									<p className="title">Username: {form.username}</p>
+									<p className="title">
+										Name: {form.fName} {form.lName}
+									</p>
+									<p className="title">
+										Location: {form.country} {form.city}
 									</p>
 								</div>
-								<div className="card-description">{form.conditions}</div>
+								<h5 className="title">
+									{form.conditions ? 'Deal conditions:' : ''} {form.conditions}
+								</h5>
 							</CardBody>
 							<CardFooter>
 								<h5 className="title">
-									Your deal amount of {form.currency} is $ {form.currencyAmount}
+									{form.currencyAmount
+										? `Your deal amount of ${form.currency} is: $ `
+										: ''}
+									{form.currencyAmount}
 								</h5>
-								<h5 className="title">Your deal price is ${form.userPrice}</h5>
 								<h5 className="title">
-									Current BTC price is $ {form.currentCurPrice}
+									{form.userPrice ? ' Your deal price is: $ ' : ''}
+									{form.userPrice}
+								</h5>
+								<h5 className="title">
+									Current BTC price is: $ {form.currentCurPrice}
 								</h5>
 
 								{/* here can be some additional shit, need to think what can be useful here */}
