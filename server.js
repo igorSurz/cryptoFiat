@@ -10,6 +10,7 @@ const { addUser, removeUser } = require('./user');
 //import routes
 const authRoutes = require('./src/routes/auth');
 const chartRoute = require('./src/routes/chart');
+const dealsRoute = require('./src/routes/deals');
 
 require('dotenv').config();
 
@@ -40,6 +41,7 @@ app.use(cors());
 //routes middleware
 app.use('/api', authRoutes);
 app.use('/api', chartRoute);
+app.use('/api', dealsRoute);
 
 app.use(function (req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');

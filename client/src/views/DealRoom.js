@@ -90,7 +90,11 @@ function DealRoom() {
 								<p className="category">PLease double check the conditions</p>
 							</CardHeader>
 							<CardBody>
-								<Table className="table-hover table-active" responsive>
+								<Table
+									className="table-hover table-active"
+									hover
+									striped
+									responsive>
 									<thead>
 										<tr>
 											<th>Name</th>

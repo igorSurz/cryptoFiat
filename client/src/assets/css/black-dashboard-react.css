@@ -11214,7 +11214,8 @@ hr {
 .table .btn {
   margin: 0; }
 
-.table small, .table .small {
+.table small,
+.table .small {
   font-weight: 300; }
 
 .card-tasks .card-body .table {
@@ -11297,6 +11298,10 @@ hr {
 
 #tables .table-responsive {
   margin-bottom: 30px; }
+
+.table-hover tbody tr:hover {
+  color: #ffffff;
+  background-color: #1e1e2f; }
 
 .form-check {
   margin-top: .5rem;
