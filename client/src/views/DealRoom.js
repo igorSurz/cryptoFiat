@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+
+//context
+import { AuthContext } from '../contexts/auth.context';
 
 // reactstrap components
 import {
@@ -18,9 +21,12 @@ import {
 import Chat from '../components/Chat/Chat';
 
 function DealRoom() {
-	const [isSetUser, setIsSetUser] = useState(false);
+	const { username, isAuthenticated } = useContext(AuthContext);
 
-	const [user, setUser] = useState({ name: '', room: '' });
+	// console.log(isAuthenticated);
+
+	const [isSetUser, setIsSetUser] = useState(true);
+	const [user, setUser] = useState({ name: username, room: 456 });
 
 	const chatDataFormHandler = () => {
 		setIsSetUser(true);
@@ -30,7 +36,16 @@ function DealRoom() {
 		const target = e.target;
 		const name = target.name;
 		const value = target.value;
-		setUser({ ...user, [name]: value });
+		if (!isAuthenticated) return;
+		setUser({ name: username, [name]: value });
+	};
+
+	const handleKeyDown = e => {
+		e.preventDefault();
+
+		if (e.key === 'Enter') {
+			chatDataFormHandler();
+		}
 	};
 
 	const chatDataForm = () => {
@@ -38,24 +53,13 @@ function DealRoom() {
 			<>
 				<Form>
 					<Row>
-						<Col className="pr-md-1" md="6">
-							<FormGroup>
-								<label>Username</label>
-								<Input
-									value={user.name}
-									name="name"
-									onChange={handleInputChange}
-									placeholder="Username"
-									type="text"
-								/>
-							</FormGroup>
-						</Col>
 						<Col className="pl-md-1" md="6">
 							<FormGroup>
 								<label htmlFor="exampleInputEmail1">Chat Room</label>
 								<Input
 									value={user.room}
 									name="room"
+									onKeyDown={handleKeyDown}
 									onChange={handleInputChange}
 									placeholder="Enter you room"
 									type="text"

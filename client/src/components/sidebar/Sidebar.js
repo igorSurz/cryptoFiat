@@ -1,7 +1,5 @@
 import React from 'react'; // ,{useContext}
 import { NavLink, Link, useLocation } from 'react-router-dom';
-// nodejs library to set properties for components
-import { PropTypes } from 'prop-types';
 
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from 'perfect-scrollbar';
@@ -133,27 +131,5 @@ function Sidebar(props) {
 		</BackgroundColorContext.Consumer>
 	);
 }
-
-Sidebar.defaultProps = {
-	routes: [{}]
-};
-
-Sidebar.propTypes = {
-	// inside the links of this component
-
-	routes: PropTypes.arrayOf(PropTypes.object),
-	logo: PropTypes.shape({
-		// innerLink is for links that will direct the user within the app
-		// it will be rendered as <Link to="...">...</Link> tag
-		innerLink: PropTypes.string,
-		// outterLink is for links that will direct the user outside the app
-		// it will be rendered as simple <a href="...">...</a> tag
-		outterLink: PropTypes.string,
-		// the text of the logo
-		text: PropTypes.node,
-		// the image src of the logo
-		imgSrc: PropTypes.string
-	})
-};
 
 export default Sidebar;

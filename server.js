@@ -66,11 +66,11 @@ const io = socketIO(server);
 
 //socket.io events
 io.on('connection', socket => {
-	console.log('socket IO connected');
 	socket.on('join', ({ name, room }, callBack) => {
 		const { user, error } = addUser({ id: socket.id, name, room });
 		if (error) return callBack(error);
 
+		console.log('socket IO connected');
 		socket.join(user.room);
 		socket.emit('message', {
 			user: 'System Message',

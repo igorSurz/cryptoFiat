@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+import io from 'socket.io-client';
+
 import { Form, Input } from 'reactstrap';
+
 import {
 	Button,
 	ListGroup,
@@ -7,7 +10,6 @@ import {
 	ListGroupItemHeading,
 	ListGroupItemText
 } from 'reactstrap';
-import io from 'socket.io-client';
 
 const socket = io.connect('/');
 
@@ -26,27 +28,22 @@ const Chat = props => {
 		if (isMounted) {
 			setRoom(room);
 			setName(name);
+			socket.connect();
 			socket.emit('join', { name, room }, error => {
 				if (error) alert(error);
 			});
 			// socket.on('connect', () => {
 			// 	console.log(socket.id);
 			// });
-		}
 
-		return () => {
-			isMounted = false;
-		};
-	}, []);
-
-	useEffect(() => {
-		//isMounted uses for preventing state update before component is mounted
-		let isMounted = true;
-		if (isMounted) {
 			socket.on('message', message => {
 				setMessages(prevState => [...prevState, message]);
 			});
+			// socket.on('disconnect', () => {
+			// 	socket.connect();
+			// });
 		}
+
 		return () => {
 			isMounted = false;
 			socket.disconnect();
@@ -57,7 +54,6 @@ const Chat = props => {
 		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
 	};
 
-	//useEffect uses hoisted function
 	useEffect(() => {
 		scrollToBottom();
 	}, [messages]);
@@ -68,6 +64,10 @@ const Chat = props => {
 			socket.emit('sendMessage', { message });
 			setMessage('');
 		} else alert('empty input');
+	};
+
+	const changeInputHandler = e => {
+		setMessage(e.target.value);
 	};
 
 	return (
@@ -92,7 +92,7 @@ const Chat = props => {
 					autoFocus={true}
 					value={message}
 					name="message"
-					onChange={e => setMessage(e.target.value)}
+					onChange={changeInputHandler}
 					cols="80"
 					placeholder="Please enter your message"
 					rows="4"
