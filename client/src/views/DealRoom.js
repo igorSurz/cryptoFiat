@@ -24,7 +24,6 @@ function DealRoom() {
 
 	const chatDataFormHandler = () => {
 		setIsSetUser(true);
-		console.log('BADUMTS');
 	};
 
 	const handleInputChange = e => {

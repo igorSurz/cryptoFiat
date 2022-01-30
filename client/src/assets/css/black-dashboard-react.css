@@ -8544,6 +8544,37 @@ a.text-darker:hover, a.text-darker:focus {
     .alert-dismissible.animated .close {
       right: 10px; }
 
+.chat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100vh - 300px); }
+
+.chatContainer {
+  height: 100%;
+  overflow-y: auto; }
+
+.message {
+  background-color: #27293d;
+  width: 100%;
+  text-align: right;
+  padding: 5px;
+  border: 1px solid #e44cc4;
+  border-radius: 0.1875rem; }
+  .message[data='System Message'] {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: baseline;
+    border: 2px solid #ffffff;
+    height: 40px; }
+
+.myMessage {
+  text-align: left;
+  background-color: #1e1e2b; }
+
+.oppMessage {
+  text-align: right; }
+
 .badge + .badge {
   margin-left: 5px; }
 

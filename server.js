@@ -73,13 +73,13 @@ io.on('connection', socket => {
 
 		socket.join(user.room);
 		socket.emit('message', {
-			user: 'Admin',
-			text: `Welcome to ${user.room}`
+			user: 'System Message',
+			text: `Welcome to room ${user.room}`
 		});
 
 		socket.broadcast
 			.to(user.room)
-			.emit('message', { user: 'Admin', text: `${user.name} has joined!` });
+			.emit('message', { user: 'System Message', text: `${user.name} has joined!` });
 		callBack(null);
 
 		socket.on('sendMessage', ({ message }) => {
@@ -95,7 +95,7 @@ io.on('connection', socket => {
 		if (user) {
 			console.log(user);
 			io.to(user.room).emit('message', {
-				user: 'Admin',
+				user: 'System Message',
 				text: `${user.name} just left the room`
 			});
 		}

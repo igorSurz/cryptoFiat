@@ -1,4 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Form, Input } from 'reactstrap';
+import {
+	Button,
+	ListGroup,
+	ListGroupItem,
+	ListGroupItemHeading,
+	ListGroupItemText
+} from 'reactstrap';
 import io from 'socket.io-client';
 
 const socket = io.connect('/');
@@ -9,7 +17,7 @@ const Chat = props => {
 	const [messages, setMessages] = useState([]);
 	const [message, setMessage] = useState('');
 
-	console.log(messages);
+	const messagesEndRef = useRef(null);
 
 	useEffect(() => {
 		const { name, room } = props;
@@ -21,6 +29,9 @@ const Chat = props => {
 			socket.emit('join', { name, room }, error => {
 				if (error) alert(error);
 			});
+			// socket.on('connect', () => {
+			// 	console.log(socket.id);
+			// });
 		}
 
 		return () => {
@@ -42,6 +53,15 @@ const Chat = props => {
 		};
 	}, []);
 
+	const scrollToBottom = () => {
+		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+	};
+
+	//useEffect uses hoisted function
+	useEffect(() => {
+		scrollToBottom();
+	}, [messages]);
+
 	const handleSubmit = e => {
 		e.preventDefault();
 		if (message) {
@@ -51,21 +71,38 @@ const Chat = props => {
 	};
 
 	return (
-		<div>
-			{messages.map((val, i) => {
-				return (
-					<div key={i}>
-						{val.text}
-						<br />
-						{val.user}
-					</div>
-				);
-			})}
+		<div className="chat">
+			<ListGroup className="chatContainer">
+				{messages.map((val, i) => {
+					return (
+						<ListGroupItem
+							className={`message ${val.user == name ? 'myMessage' : 'oppMessage'}`}
+							data={val.user}
+							key={i}>
+							<ListGroupItemHeading>{val.user}</ListGroupItemHeading>
+							<ListGroupItemText>{val.text}</ListGroupItemText>
+							<div ref={messagesEndRef} />
+						</ListGroupItem>
+					);
+				})}
+			</ListGroup>
 
-			<form action="" onSubmit={handleSubmit}>
-				<input type="text" value={message} onChange={e => setMessage(e.target.value)} />
-				<input type="submit" />
-			</form>
+			<Form>
+				<Input
+					autoFocus={true}
+					value={message}
+					name="message"
+					onChange={e => setMessage(e.target.value)}
+					cols="80"
+					placeholder="Please enter your message"
+					rows="4"
+					type="textarea"
+				/>
+
+				<Button className="btn-fill" color="primary" type="button" onClick={handleSubmit}>
+					Send Message
+				</Button>
+			</Form>
 		</div>
 	);
 };

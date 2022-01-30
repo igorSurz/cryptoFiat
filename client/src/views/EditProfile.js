@@ -76,7 +76,6 @@ function EditProfile() {
 			let userId = auth.userId;
 
 			axios.post(`/api/update`, { ...form, userId }).then(async res => {
-				console.log('res', res.data);
 				auth.update(res.data);
 				//POP UP SUCCESS MESSAGE IN BOTTOM CORNER
 			});
