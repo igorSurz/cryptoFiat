@@ -99,7 +99,12 @@ const Chat = props => {
 					type="textarea"
 				/>
 
-				<Button className="btn-fill" color="primary" type="button" onClick={handleSubmit}>
+				<Button
+					outline
+					className="btn-fill"
+					color="primary"
+					type="button"
+					onClick={handleSubmit}>
 					Send Message
 				</Button>
 			</Form>

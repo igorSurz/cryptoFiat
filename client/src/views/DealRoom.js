@@ -1,131 +1,109 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 //context
 import { AuthContext } from '../contexts/auth.context';
 
 // reactstrap components
-import {
-	Card,
-	CardHeader,
-	CardBody,
-	CardTitle,
-	Table,
-	Row,
-	Col,
-	Button,
-	FormGroup,
-	Form,
-	Input
-} from 'reactstrap';
+import { Card, CardHeader, CardBody, CardTitle, CardFooter, Row, Col, Button } from 'reactstrap';
 
 import Chat from '../components/Chat/Chat';
+import axios from 'axios';
 
 function DealRoom() {
 	const { username, isAuthenticated } = useContext(AuthContext);
+	const [offer, setOffer] = useState({});
 
 	// console.log(isAuthenticated);
 
-	const [isSetUser, setIsSetUser] = useState(true);
-	const [user, setUser] = useState({ name: username, room: 456 });
+	const [isSetUser, setIsSetUser] = useState(false);
+	const [user, setUser] = useState({
+		name: '',
+		room: ''
+	});
+
+	useEffect(() => {
+		const queryString = window.location.search;
+		const urlParams = new URLSearchParams(queryString);
+		const linkOfferId = urlParams.get('id');
+
+		// if (urlParams.has('id') may be check in the future if there is offer ID
+		try {
+			axios.post(`/api/retrieveoffer`, { offerId: linkOfferId }).then(async res => {
+				if (res.data) setOffer(res.data);
+			});
+		} catch (e) {
+			console.log(e);
+		}
+
+		setUser({
+			name: username,
+			room: `of${offer._id}${offer.username}Us${offer.userId}`
+		});
+
+		// setUser(true)
+	}, [offer]);
 
 	const chatDataFormHandler = () => {
 		setIsSetUser(true);
 	};
 
-	const handleInputChange = e => {
-		const target = e.target;
-		const name = target.name;
-		const value = target.value;
-		if (!isAuthenticated) return;
-		setUser({ name: username, [name]: value });
-	};
-
-	const handleKeyDown = e => {
-		e.preventDefault();
-
-		if (e.key === 'Enter') {
-			chatDataFormHandler();
-		}
-	};
-
 	const chatDataForm = () => {
 		return (
-			<>
-				<Form>
-					<Row>
-						<Col className="pl-md-1" md="6">
-							<FormGroup>
-								<label htmlFor="exampleInputEmail1">Chat Room</label>
-								<Input
-									value={user.room}
-									name="room"
-									onKeyDown={handleKeyDown}
-									onChange={handleInputChange}
-									placeholder="Enter you room"
-									type="text"
-								/>
-							</FormGroup>
-						</Col>
-					</Row>
-				</Form>
-				<Button
-					className="btn-fill"
-					color="primary"
-					type="submit"
-					onClick={chatDataFormHandler}>
-					Save
-				</Button>
-			</>
+			<Button
+				outline
+				className="btn-fill"
+				color="primary"
+				type="submit"
+				onClick={chatDataFormHandler}>
+				Start Chat
+			</Button>
 		);
 	};
 
 	return (
 		<>
-			<div className="content">
+			<div className="  content">
 				<Row>
 					<Col md="6">
-						<Card>
+						<Card className="dealroom card-user">
 							<CardHeader>
-								<CardTitle tag="h4">Deal Information</CardTitle>
-								<p className="category">PLease double check the conditions</p>
+								<CardTitle className="tac" tag="h4">
+									Deal conditions with this {offer.status} {offer.username}
+								</CardTitle>
 							</CardHeader>
 							<CardBody>
-								<Table
-									className="table-hover table-active"
-									hover
-									striped
-									responsive>
-									<thead>
-										<tr>
-											<th>Name</th>
-											<th>Country</th>
-											<th>City</th>
-											<th className="text-center">Amount USD</th>
-											<th className="text-center">Amount BTC</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>
-												Dakota Rice
-												<i className="tim-icons icon-shape-star" />
-												<i className="tim-icons icon-shape-star" />
-												<i className="tim-icons icon-shape-star" />
-											</td>
-											<td>Izrailovka</td>
-											<td>Oud</td>
-											<td className="text-center">$36,738</td>
-											<td className="text-center">B 0,6679</td>
-										</tr>
-										{/* <tr>
-											<td>Minerva Hooper</td>
-											<td>Curaçao</td>
-											<td>Sinaai-Waas</td>
-											<td className="text-center">$23,789</td>
-											<td className="text-center">B 0,6679</td>
-										</tr> */}
-									</tbody>
-								</Table>
+								<div className=" author m0 ">
+									<div className="block block-one" />
+									<div className="block block-two" />
+									<div className="block block-three" />
+									<div className="block block-four" />
+
+									<p className="title">
+										Name: {offer.fName} {offer.lName}
+									</p>
+									<p className="title">
+										Location: {offer.country} {offer.city}
+									</p>
+								</div>
+								<p className=" tac title">
+									{offer.conditions ? 'Deal conditions:' : ''} {offer.conditions}
+								</p>
+
+								<CardFooter>
+									<h5 className="title">
+										{offer.currencyAmount
+											? `Deal amount of ${offer.currency} is: $ `
+											: ''}
+										{offer.currencyAmount}
+									</h5>
+									<h5 className="title">
+										{offer.userPrice ? ' Deal price is: $ ' : ''}
+										{offer.userPrice}
+									</h5>
+									{/* <h5 className="title">
+									Current BTC price is: $ {form.currentCurPrice}
+								</h5> */}
+								</CardFooter>
 							</CardBody>
 						</Card>
 					</Col>

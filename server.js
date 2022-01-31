@@ -78,7 +78,7 @@ io.on('connection', socket => {
 		socket.join(user.room);
 		socket.emit('message', {
 			user: 'System Message',
-			text: `Welcome to room ${user.room}`
+			text: `Welcome to chat, have a secure deal`
 		});
 
 		socket.broadcast

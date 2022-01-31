@@ -12806,6 +12806,13 @@ textarea.form-control {
 .input-group-append .tim-icons {
   font-size: 1rem; }
 
+.dealroom .tac {
+  text-align: center;
+  margin-top: 30px; }
+
+.dealroom .m0 {
+  margin-top: 0 !important; }
+
 /*
  * Container style
  */

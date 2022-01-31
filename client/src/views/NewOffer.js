@@ -112,6 +112,7 @@ function NewOffer() {
 									<ButtonGroup>
 										<Button
 											id="Buyer"
+											outline={form.status === 'Buyer' ? false : true}
 											color={form.status === 'Buyer' ? 'info' : 'primary'}
 											active={form.status === 'Buyer' ? true : false}
 											onClick={onStatus}>
@@ -119,6 +120,7 @@ function NewOffer() {
 										</Button>
 										<Button
 											id="Seller"
+											outline={form.status === 'Seller' ? false : true}
 											color={form.status === 'Seller' ? 'info' : 'primary'}
 											active={form.status === 'Seller' ? true : false}
 											onClick={onStatus}>
@@ -245,7 +247,11 @@ function NewOffer() {
 											</FormGroup>
 										</Col>
 									</Row>
-									<Button className="btn-fill" color="primary" type="submit">
+									<Button
+										outline
+										className="btn-fill"
+										color="primary"
+										type="submit">
 										Save
 									</Button>
 								</Form>

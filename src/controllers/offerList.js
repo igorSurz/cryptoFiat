@@ -76,3 +76,10 @@ exports.retrieveAllOffers = async (req, res) => {
 
 	return res.status(200).send(offersList);
 };
+
+exports.retrieveOffer = async (req, res) => {
+	const offerId = { _id: req.body.offerId };
+	const foundOffer = await Offers.findOne({ ...offerId }).exec();
+
+	return res.status(200).send(foundOffer);
+};

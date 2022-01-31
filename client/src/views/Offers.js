@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 // reactstrap components
 import {
 	Card,
@@ -17,7 +18,7 @@ import {
 import Spinner from '../components/Spinner/Spinner';
 
 function Offers() {
-	const [isOpen, setIsOpen] = useState(true);
+	// const [isOpen, setIsOpen] = useState(true);
 	const [tableRowOpen, setTableRowOpen] = useState({ trId: '', trIsOpen: false });
 	const [offers, setOffers] = useState('');
 	const [loading, setLoading] = useState(true);
@@ -34,27 +35,6 @@ function Offers() {
 			console.log(e);
 		}
 	}, []);
-
-	// const onOpen = e => {
-	// 	console.log(e.target.id);
-	// 	let collapseElement = document.querySelector(`#key${e.target.id}`);
-
-	// 	if (collapseElement) collapseElement.classList.toggle('show');
-
-	// 	// let firstChild = b.firstChild;
-	// 	// console.log(firstChild);
-	// };
-
-	// const onClose = e => {
-	// 	e.stopPropagation();
-	// 	console.log(e.target.id);
-	// 	let collapseElement = document.querySelector(`#key${e.target.id}`);
-
-	// 	if (collapseElement) collapseElement.classList.remove('show');
-
-	// 	// let firstChild = b.firstChild;
-	// 	// console.log(firstChild);
-	// };
 
 	const collapse = offer => {
 		return (
@@ -73,6 +53,15 @@ function Offers() {
 					Name: {offer.fName} {offer.lName} <br />
 					{offer.conditions}
 				</Alert>
+				<Link to={`/dealroom?id=${offer._id}`}>
+					<Button
+						onClick={e => e.stopPropagation()}
+						className="btn btn-sm"
+						color="primary"
+						outline>
+						Go Deal
+					</Button>
+				</Link>
 			</Collapse>
 		);
 	};
