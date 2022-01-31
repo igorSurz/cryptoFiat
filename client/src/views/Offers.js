@@ -17,7 +17,8 @@ import {
 import Spinner from '../components/Spinner/Spinner';
 
 function Offers() {
-	const [isOpen, setIsOpen] = useState('huy');
+	const [isOpen, setIsOpen] = useState(true);
+	const [tableRowOpen, setTableRowOpen] = useState({ trId: '', trIsOpen: false });
 	const [offers, setOffers] = useState('');
 	const [loading, setLoading] = useState(true);
 
@@ -34,36 +35,68 @@ function Offers() {
 		}
 	}, []);
 
-	const onOpen = e => {
-		let collapseElement = document.querySelector(`#key${e.target.id}`);
+	// const onOpen = e => {
+	// 	console.log(e.target.id);
+	// 	let collapseElement = document.querySelector(`#key${e.target.id}`);
 
-		if (collapseElement) collapseElement.classList.toggle('show');
+	// 	if (collapseElement) collapseElement.classList.toggle('show');
 
-		// let firstChild = b.firstChild;
-		// console.log(firstChild);
+	// 	// let firstChild = b.firstChild;
+	// 	// console.log(firstChild);
+	// };
+
+	// const onClose = e => {
+	// 	e.stopPropagation();
+	// 	console.log(e.target.id);
+	// 	let collapseElement = document.querySelector(`#key${e.target.id}`);
+
+	// 	if (collapseElement) collapseElement.classList.remove('show');
+
+	// 	// let firstChild = b.firstChild;
+	// 	// console.log(firstChild);
+	// };
+
+	const collapse = offer => {
+		return (
+			<Collapse
+				isOpen
+				onClick={e => {
+					e.stopPropagation();
+					setTableRowOpen(prevState => ({ ...prevState, isOpen: false }));
+				}}>
+				<Alert
+					style={{
+						marginTop: '10px',
+						width: '50%'
+					}}>
+					Username: {offer.username} <br />
+					Name: {offer.fName} {offer.lName} <br />
+					{offer.conditions}
+				</Alert>
+			</Collapse>
+		);
 	};
 
 	const mapOffers = stat => {
-		return offers.map((offer, i) => {
+		return offers.map(offer => {
 			if (offer.status === stat) {
 				return (
-					<tr key={i} onClick={onOpen}>
-						<td id={i}>
-							{offer.username} {offer.fName} {offer.lName}
+					<tr
+						key={offer._id}
+						onClick={() => setTableRowOpen({ trId: offer._id, isOpen: true })}>
+						<td>
+							{tableRowOpen.trId === offer._id && tableRowOpen.isOpen
+								? null
+								: offer.username}
+
+							{tableRowOpen.trId === offer._id
+								? tableRowOpen.isOpen && collapse(offer)
+								: null}
+						</td>
+						<td>
 							<i className="tim-icons icon-shape-star" />
 							<i className="tim-icons icon-shape-star" />
 							<i className="tim-icons icon-shape-star" />
-							<div>
-								<Collapse id={'key' + i} onClick={onOpen}>
-									<Alert
-										style={{
-											marginTop: '10px',
-											width: '50%'
-										}}>
-										{offer.conditions}
-									</Alert>
-								</Collapse>
-							</div>
 						</td>
 						<td>{offer.country}</td>
 						<td>{offer.city}</td>
@@ -75,7 +108,6 @@ function Offers() {
 		});
 	};
 
-	console.log('stat', offers);
 	return (
 		<>
 			<div className="content">
@@ -93,7 +125,8 @@ function Offers() {
 									<Table className="table-hover table-active" responsive>
 										<thead>
 											<tr>
-												<th>Name</th>
+												<th>Username</th>
+												<th>Rating</th>
 												<th>Country</th>
 												<th>City</th>
 												<th className="text-center">Buyer Price USD</th>
@@ -119,7 +152,8 @@ function Offers() {
 									<Table className="table-dark table-hover " responsive>
 										<thead className="text-primary">
 											<tr>
-												<th>Name</th>
+												<th>Username</th>
+												<th>Rating</th>
 												<th>Country</th>
 												<th>City</th>
 												<th className="text-center">Seller Price USD</th>

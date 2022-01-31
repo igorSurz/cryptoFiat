@@ -159,7 +159,7 @@ function HeadNavbar(props) {
 			</Navbar>
 			<Modal modalClassName="modal-search" isOpen={modalSearch} toggle={toggleModalSearch}>
 				<ModalHeader>
-					<Input placeholder="SEARCH" type="text" />
+					<Input placeholder="UNDER DEVELOPMENT PLEASE BE PATIENT" type="text" />
 					<button aria-label="Close" className="close" onClick={toggleModalSearch}>
 						<i className="tim-icons icon-simple-remove" />
 					</button>
