@@ -11303,6 +11303,9 @@ hr {
   color: #ffffff;
   background-color: #1e1e2f; }
 
+.cursor-disabled {
+  pointer-events: none; }
+
 .form-check {
   margin-top: .5rem;
   padding-left: 0; }

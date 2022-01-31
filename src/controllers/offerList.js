@@ -70,3 +70,9 @@ exports.newOffer = (req, res, next) => {
 			});
 		});
 };
+
+exports.retrieveAllOffers = async (req, res) => {
+	const offersList = await Offers.find({});
+
+	return res.status(200).send(offersList);
+};
